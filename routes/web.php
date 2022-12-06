@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\DashboardPostController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +18,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/home', function () {
+    return view('home', [
+        ["title" => 'home'],
+        ["active" => 'home']
+    ]);
 });
 
-Route::get('home', function () {
-    return view('home');
+Route::get('/about', function () {
+    return view('about', [
+        ["title" => 'about']
+    ]);
 });
+
+Route::get('/posts', function () {
+    return view('posts', [
+        ["title" => 'posts']
+    ]);
+});
+
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate']);
+//Route::post('/logout', [LoginController::class, 'logout']);
