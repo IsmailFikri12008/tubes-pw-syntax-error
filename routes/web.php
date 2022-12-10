@@ -18,22 +18,52 @@ use App\Http\Controllers\DashboardPostController;
 |
 */
 
-Route::get('/home', function () {
-    return view('home', [
-        ["title" => 'home'],
-        ["active" => 'home']
+Route::get('/', function () {
+    return view ('home', [
+        "title" => "Home",
+        "active" => 'home'
     ]);
 });
 
-Route::get('/about', function () {
-    return view('about', [
-        ["title" => 'about']
+Route::get('/fall', function () {
+    return view('fall', [
+        "title" => "Fall",
+        "active" => 'fall'
     ]);
 });
 
-Route::get('/posts', function () {
-    return view('posts', [
-        ["title" => 'posts']
+Route::get('/summer', function () {
+    return view('summer', [
+        "title" => "Summer",
+        "active" => 'summer'
+    ]);
+});
+
+Route::get('/spring', function () {
+    return view('spring', [
+        "title" => "Spring",
+        "active" => 'spring'
+    ]);
+});
+
+Route::get('/winter', function () {
+    return view('winter', [
+        "title" => "Winter",
+        "active" => 'winter'
+    ]);
+});
+
+Route::get('/rekomendasi', function () {
+    return view('rekomendasi', [
+        "title" => 'Rekomendasi',
+        "active" => 'rekomendasi'
+    ]);
+});
+
+Route::get('/rangking', function () {
+    return view('rangking', [
+        "title" => "Rangking",
+        "active" => 'rangking'
     ]);
 });
 
