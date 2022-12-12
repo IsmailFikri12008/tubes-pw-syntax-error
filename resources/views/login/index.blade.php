@@ -32,7 +32,7 @@
           <button type="submit" class="btn btn-dark" style="background-color: #050024">Masuk</button>
         </div>
         <div class="col text-center" >
-          <img src="https://i.pinimg.com/originals/bc/ac/b4/bcacb44ddb47d02a6ba78a6c8a990871.jpg" alt="" style="height: 720px;">
+          <img src="https://i.pinimg.com/originals/bc/ac/b4/bcacb44ddb47d02a6ba78a6c8a990871.jpg" alt="" style="height: 720px; width:700px; position: absolute; right:0px; top:0px;">
         </div>
       </div>
     </div>
