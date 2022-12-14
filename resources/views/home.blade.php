@@ -13,9 +13,12 @@
             <div class="col-md">
                 <div class="card">
                     <img src="https://i.pinimg.com/originals/bc/ac/b4/bcacb44ddb47d02a6ba78a6c8a990871.jpg" alt="" style="height: 250px;">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
+                    <a href="/detail">
+                    <a href="/detail">
+                        <div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </a>
                 </div>
             </div>
             <div class="col-md">
@@ -146,7 +149,7 @@
     <div class="container">
         <div class="row mb-4 pt-4">
             <div class="col text-left">
-                <h2>Winter 2022 Anime</h2>
+                <h2>Summer 2022 Anime</h2>
             </div>
         </div>
         <hr>
@@ -195,7 +198,7 @@
     <div class="container">
         <div class="row mb-4 pt-4">
             <div class="col text-left">
-                <h2>Summer 2022 Anime</h2>
+                <h2>Winter 2022 Anime</h2>
             </div>
         </div>
         <hr>
@@ -240,5 +243,6 @@
             </div>
         </div>
     </div>
+
 
 @endsection

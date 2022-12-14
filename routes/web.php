@@ -28,6 +28,7 @@ Route::get('/', function () {
 Route::get('/fall', function () {
     return view('fall', [
         "title" => "Fall",
+        "judul" => 'Anime Fall 2022',
         "active" => 'fall'
     ]);
 });
@@ -35,6 +36,7 @@ Route::get('/fall', function () {
 Route::get('/summer', function () {
     return view('summer', [
         "title" => "Summer",
+        "judul" => 'Anime Summer 2022',
         "active" => 'summer'
     ]);
 });
@@ -42,6 +44,7 @@ Route::get('/summer', function () {
 Route::get('/spring', function () {
     return view('spring', [
         "title" => "Spring",
+        "judul" => 'Anime Spring 2022',
         "active" => 'spring'
     ]);
 });
@@ -49,6 +52,7 @@ Route::get('/spring', function () {
 Route::get('/winter', function () {
     return view('winter', [
         "title" => "Winter",
+        "judul" => 'Anime Winter 2022',
         "active" => 'winter'
     ]);
 });
@@ -64,6 +68,13 @@ Route::get('/rangking', function () {
     return view('rangking', [
         "title" => "Rangking",
         "active" => 'rangking'
+    ]);
+});
+
+Route::get('/detail', function () {
+    return view('detail', [
+        "title" => "Detail",
+        "active" => 'detail'
     ]);
 });
 
