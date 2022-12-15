@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgba(5, 0, 36, 1)">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: rgba(5, 0, 36, 1)">
     <div class="container">
       <a class="navbar-brand" href="/">Syntax Error</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
