@@ -2,7 +2,7 @@
 
 @section('container')
 
-    <div class="container">
+    <div class="container" style="margin-top: 80px;">
         <div class="row mb-4 pt-4">
             <div class="col text-center">
                 <h2>Top Anime</h2>

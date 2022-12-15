@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
-<h1 class="mb-3 text-center">{{ $judul }}</h1>
+<h1 class="mb-3 text-center" style="margin-top: 80px;">{{ $judul }}</h1>
 
 <div class="row mb-4">
     <div class="col-md">
