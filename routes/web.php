@@ -1,10 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\DashboardPostController;
+
 
 
 /*
@@ -60,6 +59,7 @@ Route::get('/winter', function () {
 Route::get('/rekomendasi', function () {
     return view('rekomendasi', [
         "title" => 'Rekomendasi',
+        "judul" => 'Rekomendasi Anime',
         "active" => 'rekomendasi'
     ]);
 });
