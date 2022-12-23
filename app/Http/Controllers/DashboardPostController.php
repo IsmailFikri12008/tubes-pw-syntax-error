@@ -23,6 +23,7 @@ class DashboardPostController extends Controller
             'animes' => Anime::where('user_id', auth()->user()->id)->get()
         ]);
     }
+
     // public function list()
     // {
     //     return view('dashboard.anime.index', [
