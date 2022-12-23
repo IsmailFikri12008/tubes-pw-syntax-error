@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Models\Anime;
 use App\Models\Category;
 use illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -19,10 +19,17 @@ class DashboardPostController extends Controller
      */
     public function index()
     {
-        return view('dashboard.posts.index', [
-            'posts' => Post::where('user_id', auth()->user()->id)->get()
+        return view('dashboard.animes.index', [
+            'animes' => Anime::where('user_id', auth()->user()->id)->get()
         ]);
     }
+    // public function list()
+    // {
+    //     return view('dashboard.anime.index', [
+    //         'anime' => Anime::where('user_id', auth()->user()->id)->get()
+    //     ]);
+    // }
+
 
     /**
      * Show the form for creating a new resource.
@@ -31,7 +38,7 @@ class DashboardPostController extends Controller
      */
     public function create()
     {
-        return view('dashboard.posts.create', [
+        return view('dashboard.animes.create', [
             'categories' => Category::all()
         ]);
     }
@@ -45,11 +52,24 @@ class DashboardPostController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'title' => 'required|max:255',
-            'slug' => 'required|unique:posts',
+            'judul' => 'required|max:255',
+            'slug' => 'required|unique:animes',
             'category_id' => 'required',
             'image' => 'image|file|max:1024',
-            'body' => 'required'
+            'tipe' => 'required',
+            'episode' => 'required',
+            'status' => 'required',
+            'rilis' => 'required',
+            'primer' => 'required',
+            'produser' => 'required',
+            'lisensi' => 'required',
+            'studio' => 'required',
+            'sumber' => 'required',
+            'genre' => 'required',
+            'demografis' => 'required',
+            'durasi' => 'required',
+            'rating' => 'required',
+            'sinopsis' => 'required|max:1000'
         ]);
 
         if($request->file('image')) {
@@ -57,11 +77,11 @@ class DashboardPostController extends Controller
         }
 
         $validatedData['user_id'] = auth()->user()->id;
-        $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 200);
+        // $validatedData['Judul'] = Str::limit(strip_tags($request->body), 200);
 
-        Animes::create($validatedData);
+        Anime::create($validatedData);
 
-        return redirect('/dashboard/posts')->with('success', 'New Post has been added!');
+        return redirect('/dashboard/animes')->with('success', 'New Anime has been added!');
     }
 
     /**
@@ -70,10 +90,10 @@ class DashboardPostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Anime $anime)
     {
-        return view('dashboard.posts.show', [
-            'post' => $post
+        return view('dashboard.animes.show', [
+            'anime' => $anime
         ]);
     }
 
@@ -83,10 +103,10 @@ class DashboardPostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Anime $anime)
     {
-        return view('dashboard.posts.edit', [
-            'post' => $post,
+        return view('dashboard.animes.edit', [
+            'anime' => $anime,
             'categories' => Category::all()
         ]);
     }
@@ -98,17 +118,31 @@ class DashboardPostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Anime $anime)
     {
         $rules = [
-            'title' => 'required|max:255',
+            'judul' => 'required|max:255',
+            'slug' => 'required|unique:animes',
             'category_id' => 'required',
             'image' => 'image|file|max:1024',
-            'body' => 'required'
+            'tipe' => 'required',
+            'episode' => 'required',
+            'status' => 'required',
+            'rilis' => 'required',
+            'primer' => 'required',
+            'produser' => 'required',
+            'lisensi' => 'required',
+            'studio' => 'required',
+            'sumber' => 'required',
+            'genre' => 'required',
+            'demografis' => 'required',
+            'durasi' => 'required',
+            'rating' => 'required',
+            'sinopsis' => 'required|max:1000'
         ];
 
-        if($request->slug != $post->slug) {
-            $rules['slug'] = 'required|unique:posts';
+        if($request->slug != $anime->slug) {
+            $rules['slug'] = 'required|unique:animes';
         }
 
         $validatedData = $request->validate($rules);
@@ -121,12 +155,12 @@ class DashboardPostController extends Controller
         }
 
         $validatedData['user_id'] = auth()->user()->id;
-        $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 200);
+        // $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 200);
 
-        Post::where('id', $post->id)
+        Anime::where('id', $anime->id)
             ->update($validatedData);
 
-        return redirect('/dashboard/posts')->with('success', 'Post has been Updated!');
+        return redirect('/dashboard/animes')->with('success', 'Post has been Updated!');
     }
 
     /**
@@ -135,20 +169,20 @@ class DashboardPostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Anime $anime)
     {
-        if($post->image) {
-            Storage::delete($post->image);
+        if($anime->image) {
+            Storage::delete($anime->image);
         }
 
-        Post::destroy($post->id);
+        Anime::destroy($anime->id);
 
-        return redirect('/dashboard/posts')->with('success', 'Post has been deleted!');
+        return redirect('/dashboard/animes')->with('success', 'Post has been deleted!');
     }
 
     public function checkSlug(Request $request)
     {
-        $slug = SlugService::createSlug(Post::class, 'slug', $request->title);
+        $slug = SlugService::createSlug(Anime::class, 'slug', $request->title);
         return response()->json(['slug' => $slug]);
     }
 }

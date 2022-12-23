@@ -15,20 +15,27 @@ return new class extends Migration
     {
         Schema::create('animes', function (Blueprint $table) {
             $table->id();
-            $table->String('Tipe');
-            $table->String('Episode');
-            $table->String('Status');
-            $table->String('Rilis');
-            $table->String('Primer');
-            $table->String('Produser');
-            $table->String('Lisensi');
-            $table->String('Studio');
-            $table->String('Sumber');
-            $table->String('Genre');
-            $table->String('Demografis');
-            $table->String('Durasi');
-            $table->String('Rating');
-            $table->String('Gambar');
+            $table->foreignId('user_id');
+            $table->foreignId('category_id');
+            $table->String('judul');
+            $table->String('slug');
+            $table->String('tipe');
+            $table->String('episode');
+            $table->String('status');
+            $table->String('rilis');
+            $table->String('primer');
+            $table->String('produser');
+            $table->String('lisensi');
+            $table->String('studio');
+            $table->String('sumber');
+            $table->String('genre');
+            $table->String('demografis');
+            $table->String('durasi');
+            $table->String('rating');
+            $table->String('image')->nullable();
+            $table->text('sinopsis');
+            $table->timestamp('published_at')->nullable();
+            $table->timestamps();
         });
     }
 
