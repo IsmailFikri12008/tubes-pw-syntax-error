@@ -1,5 +1,28 @@
 @extends('layouts.main')
 
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner" style="position: relative;">
+        <div class="carousel-item active">
+            <img src="/storage/footer/pemandangan.jpg" alt="pemandangan" style="width: 1680px; height: 650px; position: relative;">
+                <form action="/home">
+                    @if (request('category'))
+                        <input type="hidden" name="category" value="{{ request('category') }}">
+                    @endif
+                    @if (request('author'))
+                        <input type="hidden" name="author" value="{{ request('author') }}">
+                    @endif
+                    <div class="container" >
+                        <div class="input-group mb-3" style="position: absolute; top: 50%; width: 50%; text-align: center; margin: auto;">
+                            <input type="text" class="form-control" placeholder="Search.." name="search" value="{{ request('search') }}">
+                            <button class="btn btn-danger" type="submit">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section('container')
 
     <div class="container" style="margin-top: 80px;">
@@ -56,7 +79,7 @@
         </div>
         <hr>
         <div class="row mb-4 pt-4">
-            <div class="col right">
+            <div class="col text-end">
                 <a href="/">Lebih Banyak.....</a>
             </div>
         </div>
@@ -105,7 +128,7 @@
         </div>
         <hr>
         <div class="row mb-4 pt-4">
-            <div class="col right">
+            <div class="col text-end">
                 <a href="/">Lebih Banyak.....</a>
             </div>
         </div>

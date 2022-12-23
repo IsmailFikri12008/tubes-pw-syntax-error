@@ -9,27 +9,49 @@
   </head>
 
   <body>
+    @if(session()->has('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+
+    @if(session()->has('loginError'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('loginError') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
     <div class="container text-center" style="margin-left: 150px;">
       <div class="row">
         <div class="col">
           <h1 style="margin-top: 10%; font-size: 70px;" class="text-center">Form Masuk</h1>
           <br>
           <br>
-          <form class="text-start">
+          <form class="text-start" action="/login" method="post">
+            @csrf
             <div class="mb-3">
               <label for="email" class="email">Email</label>
-              <input type="email" class="form-control" id="email">
+              <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" au placeholder="name@example.com" autofocus required value="{{ old('email') }}">
+                @error('email')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="mb-3">
               <label for="password" class="email">Password</label>
-              <input type="password" class="form-control" id="password">
+              <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
             </div>
             <small class="d-block text-center mt-3">
               Belum punya akun? <a href="/register">Daftar disini</a>
             </small>
             <br>
+            <div class="container text-center">
+                <button type="submit" class="btn btn-dark" style="background-color: #050024">Masuk</button>
+            </div>
           </form>
-          <button type="submit" class="btn btn-dark" style="background-color: #050024">Masuk</button>
         </div>
         <div class="col text-center" >
           <img src="https://i.pinimg.com/originals/bc/ac/b4/bcacb44ddb47d02a6ba78a6c8a990871.jpg" alt="" style="height: 720px; width:700px; position: absolute; right:0px; top:0px;">

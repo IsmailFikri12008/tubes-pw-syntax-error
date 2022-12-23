@@ -15,22 +15,39 @@
           <h1 style="margin-top: 10%; font-size: 70px;" class="text-center">Form Daftar</h1>
           <br>
           <br>
-          <form class="text-start">
+          <form action="/register" method="post">
+            @csrf
             <div class="mb-3">
-              <label for="username" class="username">UserName</label>
-              <input type="username" class="form-control" id="username">
+                <label for="name">Name</label>
+                <input type="text" name="name" class="form-control rounded-top @error('name') is-invalid @enderror" id="name" placeholder="Name" required value="{{ old('name') }}">
+                @error('name')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="mb-3">
-              <label for="email" class="email">Email</label>
-              <input type="email" class="form-control" id="email">
+                <label for="email">Email address</label>
+                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="name@example.com" required value="{{ old('email') }}">
+                @error('email')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="mb-3">
-              <label for="password" class="email">Password</label>
-              <input type="password" class="form-control" id="password">
+                <label for="password">Password</label>
+                <input type="password" name="password" class="form-control rounded-bottom @error('password') is-invalid @enderror" id="password" placeholder="Password" required>
+                @error('password')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
-            <br>
-          </form>
-          <button type="submit" class="btn btn-dark" style="background-color: #050024">Daftar</button>
+            <input type="text" name="is_admin" id="is_admin" value="0" hidden >
+            <button type="submit" class="btn btn-dark" style="background-color: #050024">Daftar</button>
+        </form>
+            <small class="d-block text-center mt-3">Allready registered? <a href="/login">Login</a></small>
         </div>
         <div class="col text-center" >
           <img src="https://i.pinimg.com/originals/bc/ac/b4/bcacb44ddb47d02a6ba78a6c8a990871.jpg" alt="" style="height: 720px; width:700 px; position:absolute; top:0px; right:0px ">
