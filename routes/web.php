@@ -80,6 +80,13 @@ Route::get('/detail', function () {
     ]);
 });
 
+Route::get('/about', function () {
+    return view('about', [
+        "title" => "About",
+        "active" => 'about'
+    ]);
+});
+
 Route::get('/', [AnimeController::class, 'index']);
 
 // Halaman single post
