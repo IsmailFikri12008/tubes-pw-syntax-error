@@ -6,7 +6,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use \App\Models\User;
 use \App\Models\Category;
-use \App\Models\Post;
+use \App\Models\Anime;
 
 class DatabaseSeeder extends Seeder
 {
@@ -37,31 +37,49 @@ class DatabaseSeeder extends Seeder
 
         // User::factory(3)->create();
 
-        // Category::create([
-        //     'name' => 'Web Programming',
-        //     'slug' => 'web-programming'
-        // ]);
+        Category::create([
+            'name' => 'Anime Fall',
+            'slug' => 'anime-fall'
+        ]);
 
-        // Category::create([
-        //     'name' => 'Web Design',
-        //     'slug' => 'web-design'
-        // ]);
+        Category::create([
+            'name' => 'Anime Spring',
+            'slug' => 'anime-spring'
+        ]);
 
-        // Category::create([
-        //     'name' => 'Personal',
-        //     'slug' => 'personal'
-        // ]);
+        Category::create([
+            'name' => 'Anime Summer',
+            'slug' => 'anime-summer'
+        ]);
+
+        Category::create([
+            'name' => 'Anime Winter',
+            'slug' => 'anime-winter'
+        ]);
 
         // Post::factory(20)->create();
 
-        // Post::create([
-        //     'title' => 'Judul Pertama',
-        //     'slug' => 'judul-pertama',
-        //     'excerpt' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nisi nulla, eleifend a nibh at, consectetur laoreet elit.',
-        //     'body' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nisi nulla, eleifend a nibh at, consectetur laoreet elit. Phasellus libero dolor, pellentesque a maximus id, consectetur suscipit quam. Nullam eget pellentesque mi, et facilisis mi. Fusce tristique mi leo, in varius magna aliquam eu. Vivamus lobortis nec mi in dapibus. Nullam vitae sapien pulvinar, lobortis sem vel, consectetur tellus. Proin tincidunt erat urna, a lobortis eros tincidunt sit amet. Aliquam erat volutpat. Nullam a ex at nibh iaculis porttitor ac pulvinar dui. Praesent ullamcorper malesuada dui sed aliquet. Maecenas sit amet erat vitae est suscipit fermentum. Donec vitae justo eu.',
-        //     'category_id' => 1,
-        //     'user_id' => 1
-        // ]);
+        Anime::create([
+           'user_id' => 1,
+           'category_id' => 1,
+           'judul' => 'One Piece',
+           'slug' => 'one-piece',
+           'tipe' => 'TV',
+           'episode' => '12 Episode',
+           'status' => 'On Going',
+           'rilis' => '10 Desember 2020',
+           'primer' => '10 Desember',
+           'produser' => 'Mappa',
+           'lisensi' => 'Mappa Lisensi',
+           'studio' => 'Mappa Studio',
+           'sumber' => 'Shounen Jump',
+           'genre' => 'Romance',
+           'demografis' => 'Shounen',
+           'durasi' => '24 Menit',
+           'rating' => '2.4',
+           'image' => 'Go-Toubun.jpg',
+           'sinopsis' => 'Ini Sinopsis Ya Geys'
+        ]);
 
         // Post::create([
         //     'title' => 'Judul Ke Dua',

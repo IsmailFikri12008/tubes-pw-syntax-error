@@ -24,7 +24,7 @@
         position: absolute;
         border-bottom: 1px solid black;
         width: 460px;
-        right: 130px;	
+        right: 130px;
         top: 50%;
     }
 </style>
@@ -49,7 +49,7 @@
                     <p class="card-text">Primer :</p>
                     <p class="card-text">Tayang :</p>
                     <p class="card-text">Produser :</p>
-                    <p class="card-text">Liensi :</p>
+                    <p class="card-text">Lisensi :</p>
                     <p class="card-text">Studio :</p>
                     <p class="card-text">Sumber :</p>
                     <p class="card-text">Genre :</p>
@@ -61,7 +61,7 @@
         </div>
     </div>
 
-    
+
     <div class="col-lg-6 justify">
         <h2>Sinopsis</h2>
         <hr>
