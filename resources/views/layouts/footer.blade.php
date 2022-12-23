@@ -15,16 +15,16 @@
           </p>
           <div class="col text-start">
               <a href="" style="text-decoration: none;">
-                <img src="../../../img/discord.png" alt="" style="height:50px; padding-left:10px; padding-right:10px;">
+                <img src="/storage/footer/discord.png" alt="Discord" style="height:50px; padding-left:10px; padding-right:10px;">
               </a>
               <a href="" style="text-decoration: none;">
-                <img src="../../../img/github.png" alt="" style="height:50px; padding-left:10px; padding-right:10px;">
+                <img src="/storage/footer/github.png" alt="Github" style="height:50px; padding-left:10px; padding-right:10px;">
               </a>
               <a href="" style="text-decoration: none;">
-                <img src="../../../img/instagram.png" alt="" style="height:50px; padding-left:10px; padding-right:10px;">
+                <img src="/storage/footer/instagram.png" alt="Instagram" style="height:50px; padding-left:10px; padding-right:10px;">
               </a>
               <a href="" style="text-decoration: none;">
-                <img src="../../../img/youtube.png" alt="" style="height:50px; padding-left:10px; padding-right:10px;">
+                <img src="/storage/footer/youtube.png" alt="YouTube" style="height:50px; padding-left:10px; padding-right:10px;">
               </a>
           </div>
         </div>

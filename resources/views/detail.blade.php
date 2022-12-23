@@ -45,7 +45,6 @@
                     <p class="card-text">Tipe :</p>
                     <p class="card-text">Episode :</p>
                     <p class="card-text">Status :</p>
-                    <p class="card-text">Status :</p>
                     <p class="card-text">Rilis :</p>
                     <p class="card-text">Primer :</p>
                     <p class="card-text">Tayang :</p>
