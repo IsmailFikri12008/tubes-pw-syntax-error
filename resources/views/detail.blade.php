@@ -16,7 +16,7 @@
         position: absolute;
         border-bottom: 1px solid black;
         width: 460px;
-        left: 130px;
+        left: 10px;
         top: 50%;
     }
     .judul h1:after {
@@ -24,17 +24,17 @@
         position: absolute;
         border-bottom: 1px solid black;
         width: 460px;
-        right: 130px;
+        right: 10px;
         top: 50%;
     }
 </style>
 
 <div class="judul">
-    <h1 class="text-center">{{ $title }}</h1>
+    <h1 class="text-center">{{ $judul }}</h1>
 </div>
 <br>
 
-<div class="row justify-content-center">
+{{-- <div class="row justify-content-center">
     <div class="col-lg-4">
         <div class="card">
             <div class="card">
@@ -81,6 +81,65 @@
             </div>
     </div>
 
+</div> --}}
+
+<div class="container">
+    <div class="row justify-content-center mb-5">
+        <div class="col-md-8">
+            <h1 class="mb-3">{{ $animes->judul }}</h1>
+            <p>By. <a href="/animes?author={{ $animes->author->username }}" class="text-decoration-none">{{ $animes->author->name }}</a> in <a href="/animes?category={{ $animes->category->slug }}" class="text-decoration-none">{{ $animes->category->name }}</a></p>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card">
+                            @if ($animes->image)
+                            <div style="max-height: 350px; overflow: hidden;">
+                                <img src="{{ asset('storage/' . $animes->image) }}" alt="{{ $animes->category->name }}" class="img-fluid">
+                            </div>
+                            @else
+                                <img src="https://source.unsplash.com/1200x400?{{ $animes->category->name }}" alt="{{ $animes->category->name }}" class="img-fluid">
+                            @endif
+                            <div class="card-body">
+                                <h2>Informasi</h2>
+                                <hr>
+                                <p class="card-text">Tipe : {!! $animes->tipe !!}</p>
+                                <p class="card-text">Episode : {!! $animes->episode !!}</p>
+                                <p class="card-text">Status : {!! $animes->status !!}</p>
+                                <p class="card-text">Rilis : {!! $animes->rilis !!}</p>
+                                <p class="card-text">Primer : {!! $animes->primer !!}</p>
+                                <p class="card-text">Tayang : {!! $animes->tayang !!}</p>
+                                <p class="card-text">Produser : {!! $animes->produser !!}</p>
+                                <p class="card-text">Lisensi : {!! $animes->lisensi !!}</p>
+                                <p class="card-text">Studio : {!! $animes->studio !!}</p>
+                                <p class="card-text">Sumber : {!! $animes->sumber !!}</p>
+                                <p class="card-text">Genre : {!! $animes->genre !!}</p>
+                                <p class="card-text">Demografis : {!! $animes->demografis !!}</p>
+                                <p class="card-text">Durasi : {!! $animes->durasi !!}</p>
+                                <p class="card-text">Rating : {!! $animes->rating !!}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-6 justify">
+                    <h2>Sinopsis</h2>
+                    <hr>
+                    <article class="my-3 fs-5">
+                        {!! $animes->sinopsis !!}
+                    </article>
+                        <br>
+                        <div class="container text-center">
+                            <a href="/">
+                                <button type="button" class="btn btn-secondary" style="background-color: rgba(5, 0, 36, 1);">Kembali</button>
+                            </a>
+                        </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
 
 <br>

@@ -18,12 +18,13 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('category_id');
             $table->String('judul');
-            $table->String('slug');
+            $table->String('slug')->unique();
             $table->String('tipe');
             $table->String('episode');
             $table->String('status');
             $table->String('rilis');
             $table->String('primer');
+            $table->String('tayang');
             $table->String('produser');
             $table->String('lisensi');
             $table->String('studio');
@@ -33,6 +34,7 @@ return new class extends Migration
             $table->String('durasi');
             $table->String('rating');
             $table->String('image')->nullable();
+            $table->text('excerpt');
             $table->text('sinopsis');
             $table->timestamp('published_at')->nullable();
             $table->timestamps();

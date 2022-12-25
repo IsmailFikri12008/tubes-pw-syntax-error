@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Ismail Fikri',
+            'username' => 'ismail fikri',
             'email' => '203040008@mail.unpas.ac.id',
             'password' => bcrypt('12345')
         ]);
@@ -68,7 +69,8 @@ class DatabaseSeeder extends Seeder
            'episode' => '12 Episode',
            'status' => 'On Going',
            'rilis' => '10 Desember 2020',
-           'primer' => '10 Desember',
+           'primer' => '10 Desember 2020',
+           'tayang' => '20 Desember 2020',
            'produser' => 'Mappa',
            'lisensi' => 'Mappa Lisensi',
            'studio' => 'Mappa Studio',
@@ -78,6 +80,7 @@ class DatabaseSeeder extends Seeder
            'durasi' => '24 Menit',
            'rating' => '2.4',
            'image' => 'Go-Toubun.jpg',
+           'excerpt' => 'Ini Excerpt',
            'sinopsis' => 'Ini Sinopsis Ya Geys'
         ]);
 

@@ -85,6 +85,15 @@
             @enderror
         </div>
         <div class="mb-3">
+            <label for="tayang" class="form-label">Tayang</label>
+            <input type="text" class="form-control @error('tayang') is-invalid @enderror" id="tayang" name="tayang" required autofocus value="{{ old('tayang', $anime->tayang) }}">
+            @error('tayang')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+        <div class="mb-3">
             <label for="produser" class="form-label">Produser</label>
             <input type="text" class="form-control @error('produser') is-invalid @enderror" id="produser" name="produser" required autofocus value="{{ old('produser', $anime->produser) }}">
             @error('produser')
@@ -157,8 +166,13 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="image" class="form-label">Post Image</label>
-            <img class="img-preview img-fluid mb-3 col-sm-5">
+            <label for="image" class="form-label">Anime Image</label>
+            <input type="hidden" name="oldImage" value="{{ $anime->image }}">
+            @if ($anime->image)
+                <img src="{{ asset('storage/' . $anime->image) }}" class="img-preview img-fluid mb-3 col-sm-5 d-block">
+            @else
+                <img class="img-preview img-fluid mb-3 col-sm-5">
+            @endif
             <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image" onchange="previewImage()">
             @error('image')
                 <div class="invalid-feedback">
@@ -175,6 +189,7 @@
             <trix-editor input="sinopsis"></trix-editor>
         </div>
         <button type="submit" class="btn btn-primary">Update Anime Post</button>
+        <a href="/dashboard/animes" class="btn btn-primary"><span data-feather="arrow-left"></span> Kembali Ke Dashboard</a>
     </form>
 </div>
 

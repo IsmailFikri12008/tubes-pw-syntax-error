@@ -90,7 +90,7 @@
 
 </head>
 <body>
-  
+
   <div class="container">
     <div class="card position-absolute top-50 start-50 translate-middle" style="width: 20rem;">
       <h1>Form Daftar</h1>

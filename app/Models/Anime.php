@@ -4,10 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
+use App\Models\User;
+use App\Models\Category;
+
 
 class Anime extends Model
 {
     use HasFactory;
+    use Sluggable;
 
     protected $guarded = ['id'];
     protected $with = ['category', 'author'];
@@ -18,8 +23,8 @@ class Anime extends Model
         // }
 
         $query->when($filters['search'] ?? false, function($query, $search) {
-            return $query->where('title', 'like', '%' . $search . '%')
-                        ->orWhere('body', 'like', '%' . $search . '%');
+            return $query->where('judul', 'like', '%' . $search . '%')
+                        ->orWhere('sinopsis', 'like', '%' . $search . '%');
         });
 
         $query->when($filters['category'] ?? false, function($query, $category) {
@@ -50,8 +55,8 @@ class Anime extends Model
     {
         return [
             'slug' => [
-                'source' => 'title'
-            ]
+                'source' => 'judul'
+            ],
         ];
     }
 }
