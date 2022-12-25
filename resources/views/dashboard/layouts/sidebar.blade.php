@@ -29,4 +29,4 @@
       </ul>
       @endcan
     </div>
-  </nav>
+    </nav>

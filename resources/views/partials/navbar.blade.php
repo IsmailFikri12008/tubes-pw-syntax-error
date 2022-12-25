@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: rgba(5, 0, 36, 1)">
     <div class="container">
-      <a class="navbar-brand" href="/">Syntax Error</a>
+      <a class="navbar-brand" href="/"><img src="/storage/footer/logo.png" alt="" style="max-height: 30px"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>

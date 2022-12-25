@@ -22,16 +22,16 @@ function get_CURL($url)
 //   $allAnime[] = $myAnime;
 // }
 
-$namaAnime = ['one-piece', 'dragon-ball-z', 'bleach', 'naruto'];
+$namaAnime = ['one-piece', 'tokyo-ghoul', 'black-clover', 'naruto'];
 $allAnime = [];
 foreach ($namaAnime as $anim) {
-  $myAnime = [];
-  $hasil = get_CURL('https://kitsu.io/api/edge/anime?filter[slug]=' . $anim);
-  // var_dump(strtoupper($hasil['data'][0]['attributes']['slug']));
-  $myAnime['judul'] = strtoupper($hasil['data'][0]['attributes']['slug']);
-  $myAnime['foto'] = $hasil['data'][0]['attributes']['posterImage']['small'];
+    $myAnime = [];
+    $hasil = get_CURL('https://kitsu.io/api/edge/anime?filter[slug]=' . $anim);
+    // var_dump(strtoupper($hasil['data'][0]['attributes']['slug']));
+    $myAnime['judul'] = strtoupper($hasil['data'][0]['attributes']['slug']);
+    $myAnime['foto'] = $hasil['data'][0]['attributes']['posterImage']['small'];
 
-  $allAnime[] = $myAnime;
+    $allAnime[] = $myAnime;
 }
 
 // $namaAnime = 'naruto';
@@ -119,44 +119,35 @@ foreach ($namaAnime as $anim) {
             <a href="/fall">Lebih Banyak.....</a>
         </div>
 
-        <div class="card mb-3">
-            @if ($animes[0]->image)
-                <div style="max-height: 400px; overflow: hidden;">
-                    <img src="{{ asset('storage/' . $animes[0]->image) }}" alt="{{ $animes[0]->category->name }}" class="img-fluid">
-                </div>
-            @else
-                <img src="https://source.unsplash.com/1200x400?{{ $animes[0]->category->name }}" class="card-img-top" alt="{{ $animes[0]->category->name }}">
-            @endif
-                <div class="card-body text-center">
-                    <h3 class="card-title"><a href="/posts/{{ $animes[0]->slug }}" class="text-decoration-none text-dark">{{ $animes[0]->title }}</a></h3>
-                    <p><small class="text-muted">By. <a href="/posts?author={{ $animes[0]->author->username }}" class="text-decoration-none">{{ $animes[0]->author->name }}</a> in <a href="/posts?category={{ $animes[0]->category->slug }}" class="text-decoration-none">{{ $animes[0]->category->name }}</a> {{ $animes[0]->created_at->diffForHumans() }}</small></p>
-                    <p class="card-text">{{ $animes[0]->excerpt }}</p>
-                    <a href="/posts/{{ $animes[0]->slug }}" class="text-decoration-none btn btn-primary">Read more</a>
-                </div>
-        </div>
-
         <div class="container">
             <div class="row">
-                @foreach ($animes->skip(1) as $anime)
+                @foreach ($animes as $anime)
                     <div class="col-md-4 bb-3">
                         <div class="card">
-                            <div class="position-absolute px-3 py-2" style="background-color: rgba(0, 0, 0, 0.7)"><a href="/posts?category={{ $anime->category->slug }}" class="text-white text-decoration-none">{{ $anime->category->name }}</a></div>
+                            <div class="position-absolute px-3 py-2" style="background-color: rgba(0, 0, 0, 0.7)"><a href="/animes?category={{ $anime->category->slug }}" class="text-white text-decoration-none">{{ $anime->category->name }}</a></div>
                             @if ($anime->image)
                                 <img src="{{ asset('storage/' . $anime->image) }}" alt="{{ $anime->category->name }}" class="img-fluid">
                             @else
                                 <img src="https://source.unsplash.com/500x400?{{ $anime->category->name }}" class="card-img-top" alt="{{ $anime->category->name }}">
                             @endif
                             <div class="card-body">
-                            <h5 class="card-title">{{ $anime->title }}</h5>
-                            <p><small class="text-muted">By. <a href="/posts?author={{ $anime->author->username }}" class="text-decoration-none">{{ $anime->author->name }}</a> {{ $anime->created_at->diffForHumans() }}</small></p>
+                            <h5 class="card-title">{{ $anime->judul }}</h5>
+                            <p><small class="text-muted">By. <a href="/animes?author={{ $anime->author->username }}" class="text-decoration-none">{{ $anime->author->name }}</a> {{ $anime->created_at->diffForHumans() }}</small></p>
                             <p class="card-text">{{ $anime->excerpt }}</p>
-                            <a href="/posts/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
+                            <a href="/animes/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
                             </div>
                         </div>
                     </div>
                 @endforeach
             </div>
+        </div>
+    </div>
+    @else
+        <p class="text-center fs-4">No Post Found.</p>
+    @endif
 
+    @if ($animes->count())
+    <div class="container">
         <div class="col text-left">
             <h2>Anime Spring</h2>
         </div>
@@ -165,91 +156,72 @@ foreach ($namaAnime as $anim) {
             <a href="/spring">Lebih Banyak.....</a>
         </div>
 
-        <div class="card mb-3">
-            @if ($animes[0]->image)
-                <div style="max-height: 400px; overflow: hidden;">
-                    <img src="{{ asset('storage/' . $animes[0]->image) }}" alt="{{ $animes[0]->category->name }}" class="img-fluid">
-                </div>
-            @else
-                <img src="https://source.unsplash.com/1200x400?{{ $animes[0]->category->name }}" class="card-img-top" alt="{{ $animes[0]->category->name }}">
-            @endif
-                <div class="card-body text-center">
-                    <h3 class="card-title"><a href="/posts/{{ $animes[0]->slug }}" class="text-decoration-none text-dark">{{ $animes[0]->title }}</a></h3>
-                    <p><small class="text-muted">By. <a href="/posts?author={{ $animes[0]->author->username }}" class="text-decoration-none">{{ $animes[0]->author->name }}</a> in <a href="/posts?category={{ $animes[0]->category->slug }}" class="text-decoration-none">{{ $animes[0]->category->name }}</a> {{ $animes[0]->created_at->diffForHumans() }}</small></p>
-                    <p class="card-text">{{ $animes[0]->excerpt }}</p>
-                    <a href="/posts/{{ $animes[0]->slug }}" class="text-decoration-none btn btn-primary">Read more</a>
-                </div>
-        </div>
-
         <div class="container">
             <div class="row">
-                @foreach ($animes->skip(1) as $anime)
+                @foreach ($animes as $anime)
                     <div class="col-md-4 bb-3">
                         <div class="card">
-                            <div class="position-absolute px-3 py-2" style="background-color: rgba(0, 0, 0, 0.7)"><a href="/posts?category={{ $anime->category->slug }}" class="text-white text-decoration-none">{{ $anime->category->name }}</a></div>
+                            <div class="position-absolute px-3 py-2" style="background-color: rgba(0, 0, 0, 0.7)"><a href="/animes?category={{ $anime->category->slug }}" class="text-white text-decoration-none">{{ $anime->category->name }}</a></div>
                             @if ($anime->image)
                                 <img src="{{ asset('storage/' . $anime->image) }}" alt="{{ $anime->category->name }}" class="img-fluid">
                             @else
                                 <img src="https://source.unsplash.com/500x400?{{ $anime->category->name }}" class="card-img-top" alt="{{ $anime->category->name }}">
                             @endif
                             <div class="card-body">
-                            <h5 class="card-title">{{ $anime->title }}</h5>
-                            <p><small class="text-muted">By. <a href="/posts?author={{ $anime->author->username }}" class="text-decoration-none">{{ $anime->author->name }}</a> {{ $anime->created_at->diffForHumans() }}</small></p>
+                            <h5 class="card-title">{{ $anime->judul }}</h5>
+                            <p><small class="text-muted">By. <a href="/animes?author={{ $anime->author->username }}" class="text-decoration-none">{{ $anime->author->name }}</a> {{ $anime->created_at->diffForHumans() }}</small></p>
                             <p class="card-text">{{ $anime->excerpt }}</p>
-                            <a href="/posts/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
+                            <a href="/animes/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
                             </div>
                         </div>
                     </div>
                 @endforeach
             </div>
+        </div>
+    </div>
+    @else
+        <p class="text-center fs-4">No Post Found.</p>
+    @endif
 
+    @if ($animes->count())
+    <div class="container">
         <div class="col text-left">
             <h2>Anime Summer</h2>
         </div>
         <hr>
-
         <div class="col text-end">
             <a href="/summer">Lebih Banyak.....</a>
         </div>
 
-        <div class="card mb-3">
-            @if ($animes[0]->image)
-                <div style="max-height: 400px; overflow: hidden;">
-                    <img src="{{ asset('storage/' . $animes[0]->image) }}" alt="{{ $animes[0]->category->name }}" class="img-fluid">
-                </div>
-            @else
-                <img src="https://source.unsplash.com/1200x400?{{ $animes[0]->category->name }}" class="card-img-top" alt="{{ $animes[0]->category->name }}">
-            @endif
-                <div class="card-body text-center">
-                    <h3 class="card-title"><a href="/posts/{{ $animes[0]->slug }}" class="text-decoration-none text-dark">{{ $animes[0]->title }}</a></h3>
-                    <p><small class="text-muted">By. <a href="/posts?author={{ $animes[0]->author->username }}" class="text-decoration-none">{{ $animes[0]->author->name }}</a> in <a href="/posts?category={{ $animes[0]->category->slug }}" class="text-decoration-none">{{ $animes[0]->category->name }}</a> {{ $animes[0]->created_at->diffForHumans() }}</small></p>
-                    <p class="card-text">{{ $animes[0]->excerpt }}</p>
-                    <a href="/posts/{{ $animes[0]->slug }}" class="text-decoration-none btn btn-primary">Read more</a>
-                </div>
-        </div>
-
         <div class="container">
             <div class="row">
-                @foreach ($animes->skip(1) as $anime)
+                @foreach ($animes as $anime)
                     <div class="col-md-4 bb-3">
                         <div class="card">
-                            <div class="position-absolute px-3 py-2" style="background-color: rgba(0, 0, 0, 0.7)"><a href="/posts?category={{ $anime->category->slug }}" class="text-white text-decoration-none">{{ $anime->category->name }}</a></div>
+                            <div class="position-absolute px-3 py-2" style="background-color: rgba(0, 0, 0, 0.7)"><a href="/animes?category={{ $anime->category->slug }}" class="text-white text-decoration-none">{{ $anime->category->name }}</a></div>
                             @if ($anime->image)
                                 <img src="{{ asset('storage/' . $anime->image) }}" alt="{{ $anime->category->name }}" class="img-fluid">
                             @else
                                 <img src="https://source.unsplash.com/500x400?{{ $anime->category->name }}" class="card-img-top" alt="{{ $anime->category->name }}">
                             @endif
                             <div class="card-body">
-                            <h5 class="card-title">{{ $anime->title }}</h5>
-                            <p><small class="text-muted">By. <a href="/posts?author={{ $anime->author->username }}" class="text-decoration-none">{{ $anime->author->name }}</a> {{ $anime->created_at->diffForHumans() }}</small></p>
+                            <h5 class="card-title">{{ $anime->judul }}</h5>
+                            <p><small class="text-muted">By. <a href="/animes?author={{ $anime->author->username }}" class="text-decoration-none">{{ $anime->author->name }}</a> {{ $anime->created_at->diffForHumans() }}</small></p>
                             <p class="card-text">{{ $anime->excerpt }}</p>
-                            <a href="/posts/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
+                            <a href="/animes/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
                             </div>
                         </div>
                     </div>
                 @endforeach
             </div>
+        </div>
+    </div>
+    @else
+        <p class="text-center fs-4">No Post Found.</p>
+    @endif
 
+    @if ($animes->count())
+    <div class="container">
         <div class="col text-left">
             <h2>Anime Winter</h2>
         </div>
@@ -258,6 +230,46 @@ foreach ($namaAnime as $anim) {
             <a href="/winter">Lebih Banyak.....</a>
         </div>
 
+        <div class="container">
+            <div class="row">
+                @foreach ($animes as $anime)
+                    <div class="col-md-4 bb-3">
+                        <div class="card">
+                            <div class="position-absolute px-3 py-2" style="background-color: rgba(0, 0, 0, 0.7)"><a href="/animes?category={{ $anime->category->slug }}" class="text-white text-decoration-none">{{ $anime->category->name }}</a></div>
+                            @if ($anime->image)
+                                <img src="{{ asset('storage/' . $anime->image) }}" alt="{{ $anime->category->name }}" class="img-fluid">
+                            @else
+                                <img src="https://source.unsplash.com/500x400?{{ $anime->category->name }}" class="card-img-top" alt="{{ $anime->category->name }}">
+                            @endif
+                            <div class="card-body">
+                            <h5 class="card-title">{{ $anime->judul }}</h5>
+                            <p><small class="text-muted">By. <a href="/animes?author={{ $anime->author->username }}" class="text-decoration-none">{{ $anime->author->name }}</a> {{ $anime->created_at->diffForHumans() }}</small></p>
+                            <p class="card-text">{{ $anime->excerpt }}</p>
+                            <a href="/animes/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+    @else
+        <p class="text-center fs-4">No Post Found.</p>
+    @endif
+    {{-- <div class="d-flex justify-content-end">
+        {{ $animes->links() }}
+    </div> --}}
+
+    {{-- @if ($animes->count())
+    <div class="container">
+        <div class="col text-left">
+            <h2>Anime Fall</h2>
+        </div>
+        <hr>
+        <div class="col text-end">
+            <a href="/fall">Lebih Banyak.....</a>
+        </div>
+
         <div class="card mb-3">
             @if ($animes[0]->image)
                 <div style="max-height: 400px; overflow: hidden;">
@@ -297,55 +309,116 @@ foreach ($namaAnime as $anim) {
             </div>
         </div>
     </div>
-</div>
-</div>
-</div>
-    {{-- <div class="card mb-3">
-        @if ($animes[0]->image)
-            <div style="max-height: 400px; overflow: hidden;">
-                <img src="{{ asset('storage/' . $animes[0]->image) }}" alt="{{ $animes[0]->category->name }}" class="img-fluid">
-            </div>
-        @else
-            <img src="https://source.unsplash.com/1200x400?{{ $animes[0]->category->name }}" class="card-img-top" alt="{{ $animes[0]->category->name }}">
-        @endif
-        <div class="card-body text-center">
-          <h3 class="card-title"><a href="/posts/{{ $animes[0]->slug }}" class="text-decoration-none text-dark">{{ $animes[0]->title }}</a></h3>
-          <p><small class="text-muted">By. <a href="/posts?author={{ $animes[0]->author->username }}" class="text-decoration-none">{{ $animes[0]->author->name }}</a> in <a href="/posts?category={{ $animes[0]->category->slug }}" class="text-decoration-none">{{ $animes[0]->category->name }}</a> {{ $animes[0]->created_at->diffForHumans() }}</small></p>
-          <p class="card-text">{{ $animes[0]->excerpt }}</p>
-          <a href="/posts/{{ $animes[0]->slug }}" class="text-decoration-none btn btn-primary">Read more</a>
-        </div>
-    </div>
-
-
-    <div class="container">
-        <div class="row">
-            @foreach ($animes->skip(1) as $anime)
-                <div class="col-md-4 bb-3">
-                    <div class="card">
-                        <div class="position-absolute px-3 py-2" style="background-color: rgba(0, 0, 0, 0.7)"><a href="/posts?category={{ $anime->category->slug }}" class="text-white text-decoration-none">{{ $anime->category->name }}</a></div>
-                        @if ($anime->image)
-                            <img src="{{ asset('storage/' . $anime->image) }}" alt="{{ $anime->category->name }}" class="img-fluid">
-                        @else
-                            <img src="https://source.unsplash.com/500x400?{{ $anime->category->name }}" class="card-img-top" alt="{{ $anime->category->name }}">
-                        @endif
-                        <div class="card-body">
-                        <h5 class="card-title">{{ $anime->title }}</h5>
-                        <p><small class="text-muted">By. <a href="/posts?author={{ $anime->author->username }}" class="text-decoration-none">{{ $anime->author->name }}</a> {{ $anime->created_at->diffForHumans() }}</small></p>
-                        <p class="card-text">{{ $anime->excerpt }}</p>
-                        <a href="/posts/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>--}}
-
     @else
         <p class="text-center fs-4">No Post Found.</p>
     @endif
 
-    <div class="d-flex justify-content-end">
-        {{ $animes->links() }}
+    @if ($animes->count())
+    <div class="container">
+        <div class="col text-left">
+            <h2>Anime Fall</h2>
+        </div>
+        <hr>
+        <div class="col text-end">
+            <a href="/fall">Lebih Banyak.....</a>
+        </div>
+
+        <div class="card mb-3">
+            @if ($animes[0]->image)
+                <div style="max-height: 400px; overflow: hidden;">
+                    <img src="{{ asset('storage/' . $animes[0]->image) }}" alt="{{ $animes[0]->category->name }}" class="img-fluid">
+                </div>
+            @else
+                <img src="https://source.unsplash.com/1200x400?{{ $animes[0]->category->name }}" class="card-img-top" alt="{{ $animes[0]->category->name }}">
+            @endif
+                <div class="card-body text-center">
+                    <h3 class="card-title"><a href="/posts/{{ $animes[0]->slug }}" class="text-decoration-none text-dark">{{ $animes[0]->title }}</a></h3>
+                    <p><small class="text-muted">By. <a href="/posts?author={{ $animes[0]->author->username }}" class="text-decoration-none">{{ $animes[0]->author->name }}</a> in <a href="/posts?category={{ $animes[0]->category->slug }}" class="text-decoration-none">{{ $animes[0]->category->name }}</a> {{ $animes[0]->created_at->diffForHumans() }}</small></p>
+                    <p class="card-text">{{ $animes[0]->excerpt }}</p>
+                    <a href="/posts/{{ $animes[0]->slug }}" class="text-decoration-none btn btn-primary">Read more</a>
+                </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                @foreach ($animes->skip(1) as $anime)
+                    <div class="col-md-4 bb-3">
+                        <div class="card">
+                            <div class="position-absolute px-3 py-2" style="background-color: rgba(0, 0, 0, 0.7)"><a href="/posts?category={{ $anime->category->slug }}" class="text-white text-decoration-none">{{ $anime->category->name }}</a></div>
+                            @if ($anime->image)
+                            <img src="{{ asset('storage/' . $anime->image) }}" alt="{{ $anime->category->name }}" class="img-fluid">
+                            @else
+                                <img src="https://source.unsplash.com/500x400?{{ $anime->category->name }}" class="card-img-top" alt="{{ $anime->category->name }}">
+                            @endif
+                            <div class="card-body">
+                            <h5 class="card-title">{{ $anime->title }}</h5>
+                            <p><small class="text-muted">By. <a href="/posts?author={{ $anime->author->username }}" class="text-decoration-none">{{ $anime->author->name }}</a> {{ $anime->created_at->diffForHumans() }}</small></p>
+                            <p class="card-text">{{ $anime->excerpt }}</p>
+                            <a href="/posts/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
     </div>
+    @else
+    <p class="text-center fs-4">No Post Found.</p>
+    @endif
+
+    @if ($animes->count())
+    <div class="container">
+        <div class="col text-left">
+            <h2>Anime Fall</h2>
+        </div>
+        <hr>
+        <div class="col text-end">
+            <a href="/fall">Lebih Banyak.....</a>
+        </div>
+
+        <div class="card mb-3">
+            @if ($animes[0]->image)
+                <div style="max-height: 400px; overflow: hidden;">
+                    <img src="{{ asset('storage/' . $animes[0]->image) }}" alt="{{ $animes[0]->category->name }}" class="img-fluid">
+                </div>
+            @else
+                <img src="https://source.unsplash.com/1200x400?{{ $animes[0]->category->name }}" class="card-img-top" alt="{{ $animes[0]->category->name }}">
+            @endif
+                <div class="card-body text-center">
+                    <h3 class="card-title"><a href="/posts/{{ $animes[0]->slug }}" class="text-decoration-none text-dark">{{ $animes[0]->title }}</a></h3>
+                    <p><small class="text-muted">By. <a href="/posts?author={{ $animes[0]->author->username }}" class="text-decoration-none">{{ $animes[0]->author->name }}</a> in <a href="/posts?category={{ $animes[0]->category->slug }}" class="text-decoration-none">{{ $animes[0]->category->name }}</a> {{ $animes[0]->created_at->diffForHumans() }}</small></p>
+                    <p class="card-text">{{ $animes[0]->excerpt }}</p>
+                    <a href="/posts/{{ $animes[0]->slug }}" class="text-decoration-none btn btn-primary">Read more</a>
+                </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                @foreach ($animes->skip(1) as $anime)
+                    <div class="col-md-4 bb-3">
+                        <div class="card">
+                            <div class="position-absolute px-3 py-2" style="background-color: rgba(0, 0, 0, 0.7)"><a href="/posts?category={{ $anime->category->slug }}" class="text-white text-decoration-none">{{ $anime->category->name }}</a></div>
+                            @if ($anime->image)
+                                <img src="{{ asset('storage/' . $anime->image) }}" alt="{{ $anime->category->name }}" class="img-fluid">
+                            @else
+                                <img src="https://source.unsplash.com/500x400?{{ $anime->category->name }}" class="card-img-top" alt="{{ $anime->category->name }}">
+                            @endif
+                            <div class="card-body">
+                            <h5 class="card-title">{{ $anime->title }}</h5>
+                            <p><small class="text-muted">By. <a href="/posts?author={{ $anime->author->username }}" class="text-decoration-none">{{ $anime->author->name }}</a> {{ $anime->created_at->diffForHumans() }}</small></p>
+                            <p class="card-text">{{ $anime->excerpt }}</p>
+                            <a href="/posts/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+
+    @else
+        <p class="text-center fs-4">No Post Found.</p>
+    @endif --}}
 
     {{-- <div class="container">
         <div class="row mb-4 pt-4">

@@ -6,9 +6,9 @@ use App\Models\Anime;
 use App\Models\Category;
 use illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Cviebrock\EloquentSluggable\Services\SlugService;
+
 
 class DashboardPostController extends Controller
 {
@@ -62,6 +62,7 @@ class DashboardPostController extends Controller
             'status' => 'required',
             'rilis' => 'required',
             'primer' => 'required',
+            'tayang' => 'required',
             'produser' => 'required',
             'lisensi' => 'required',
             'studio' => 'required',
@@ -70,15 +71,15 @@ class DashboardPostController extends Controller
             'demografis' => 'required',
             'durasi' => 'required',
             'rating' => 'required',
-            'sinopsis' => 'required|max:1000'
+            'sinopsis' => 'required'
         ]);
 
         if($request->file('image')) {
-            $validatedData['image'] = $request->file('image')->store('post-images');
+            $validatedData['image'] = $request->file('image')->store('anime-images');
         }
 
         $validatedData['user_id'] = auth()->user()->id;
-        // $validatedData['Judul'] = Str::limit(strip_tags($request->body), 200);
+        $validatedData['excerpt'] = Str::limit(strip_tags($request->sinopsis), 200);
 
         Anime::create($validatedData);
 
@@ -123,7 +124,7 @@ class DashboardPostController extends Controller
     {
         $rules = [
             'judul' => 'required|max:255',
-            'slug' => 'required|unique:animes',
+            // 'slug' => 'required|unique:animes',
             'category_id' => 'required',
             'image' => 'image|file|max:1024',
             'tipe' => 'required',
@@ -131,6 +132,7 @@ class DashboardPostController extends Controller
             'status' => 'required',
             'rilis' => 'required',
             'primer' => 'required',
+            'tayang' => 'required',
             'produser' => 'required',
             'lisensi' => 'required',
             'studio' => 'required',
@@ -139,7 +141,7 @@ class DashboardPostController extends Controller
             'demografis' => 'required',
             'durasi' => 'required',
             'rating' => 'required',
-            'sinopsis' => 'required|max:1000'
+            'sinopsis' => 'required'
         ];
 
         if($request->slug != $anime->slug) {
@@ -152,11 +154,11 @@ class DashboardPostController extends Controller
             if($request->oldImage) {
                 Storage::delete($request->oldImage);
             }
-            $validatedData['image'] = $request->file('image')->store('post-images');
+            $validatedData['image'] = $request->file('image')->store('anime-images');
         }
 
         $validatedData['user_id'] = auth()->user()->id;
-        // $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 200);
+        $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 200);
 
         Anime::where('id', $anime->id)
             ->update($validatedData);
@@ -183,7 +185,7 @@ class DashboardPostController extends Controller
 
     public function checkSlug(Request $request)
     {
-        $slug = SlugService::createSlug(Anime::class, 'slug', $request->title);
+        $slug = SlugService::createSlug(Anime::class, 'slug', $request->judul);
         return response()->json(['slug' => $slug]);
     }
 }
