@@ -99,9 +99,18 @@
           <form action="/register" method="post">
             @csrf
             <div class="mb-3">
-                <label for="name">Name</label>
-                <input type="text" name="name" class="form-control rounded-top @error('name') is-invalid @enderror" id="name" placeholder="name" required value="{{ old('name') }}">
+                <label for="name">Nama Lengkap</label>
+                <input type="text" name="name" class="form-control rounded-top @error('name') is-invalid @enderror" id="name" placeholder="nama lengkap" required value="{{ old('name') }}">
                 @error('name')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="mb-3">
+                <label for="username">Username</label>
+                <input type="text" name="username" class="form-control rounded-top @error('username') is-invalid @enderror" id="username" placeholder="username" required value="{{ old('username') }}">
+                @error('username')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anime;
+use App\Models\Genre;
 use App\Models\Category;
 use illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -40,7 +41,8 @@ class DashboardPostController extends Controller
     public function create()
     {
         return view('dashboard.animes.create', [
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'genres' => Genre::all()
         ]);
     }
 
@@ -56,6 +58,7 @@ class DashboardPostController extends Controller
             'judul' => 'required|max:255',
             'slug' => 'required|unique:animes',
             'category_id' => 'required',
+            'genre_id' => 'required',
             'image' => 'image|file|max:1024',
             'tipe' => 'required',
             'episode' => 'required',
@@ -67,7 +70,7 @@ class DashboardPostController extends Controller
             'lisensi' => 'required',
             'studio' => 'required',
             'sumber' => 'required',
-            'genre' => 'required',
+            // 'genre' => 'required',
             'demografis' => 'required',
             'durasi' => 'required',
             'rating' => 'required',
@@ -124,8 +127,9 @@ class DashboardPostController extends Controller
     {
         $rules = [
             'judul' => 'required|max:255',
-            // 'slug' => 'required|unique:animes',
+            'slug' => 'required|unique:animes',
             'category_id' => 'required',
+            'genre_id' => 'required',
             'image' => 'image|file|max:1024',
             'tipe' => 'required',
             'episode' => 'required',
@@ -137,7 +141,7 @@ class DashboardPostController extends Controller
             'lisensi' => 'required',
             'studio' => 'required',
             'sumber' => 'required',
-            'genre' => 'required',
+            // 'genre' => 'required',
             'demografis' => 'required',
             'durasi' => 'required',
             'rating' => 'required',
@@ -180,7 +184,9 @@ class DashboardPostController extends Controller
 
         Anime::destroy($anime->id);
 
-        return redirect('/dashboard/animes')->with('success', 'Post has been deleted!');
+        return redirect('/dashboard/animes')->with('success', 'Anime Post has been deleted!');
+
+        // return Anime::where('id', $anime->id)->get();
     }
 
     public function checkSlug(Request $request)

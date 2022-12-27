@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use \App\Models\User;
 use \App\Models\Category;
 use \App\Models\Anime;
+use \App\Models\Genre;
 
 class DatabaseSeeder extends Seeder
 {
@@ -25,7 +26,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Ismail Fikri',
-            'username' => 'ismail fikri',
+            // 'username' => 'ismail fikri',
             'email' => '203040008@mail.unpas.ac.id',
             'password' => bcrypt('12345')
         ]);
@@ -60,9 +61,60 @@ class DatabaseSeeder extends Seeder
 
         // Post::factory(20)->create();
 
+        Genre::create([
+            'name' => 'Action',
+            'slug' => 'action'
+        ]);
+
+        Genre::create([
+            'name' => 'Adventure',
+            'slug' => 'Adventure'
+        ]);
+
+        Genre::create([
+            'name' => 'Comedy',
+            'slug' => 'Comedy'
+        ]);
+
+        Genre::create([
+            'name' => 'Drama',
+            'slug' => 'Drama'
+        ]);
+
+        Genre::create([
+            'name' => 'Fantasy',
+            'slug' => 'fantasy'
+        ]);
+
+        Genre::create([
+            'name' => 'Horror',
+            'slug' => 'horror'
+        ]);
+
+        Genre::create([
+            'name' => 'Romance',
+            'slug' => 'romance'
+        ]);
+
+        Genre::create([
+            'name' => 'Thriller',
+            'slug' => 'thriller'
+        ]);
+
+        Genre::create([
+            'name' => 'Slie of Life',
+            'slug' => 'slie-of-life'
+        ]);
+
+        Genre::create([
+            'name' => 'Sport',
+            'slug' => 'sport'
+        ]);
+
         Anime::create([
            'user_id' => 1,
            'category_id' => 1,
+           'genre_id' => 1,
            'judul' => 'One Piece',
            'slug' => 'one-piece',
            'tipe' => 'TV',
@@ -75,7 +127,6 @@ class DatabaseSeeder extends Seeder
            'lisensi' => 'Mappa Lisensi',
            'studio' => 'Mappa Studio',
            'sumber' => 'Shounen Jump',
-           'genre' => 'Romance',
            'demografis' => 'Shounen',
            'durasi' => '24 Menit',
            'rating' => '2.4',

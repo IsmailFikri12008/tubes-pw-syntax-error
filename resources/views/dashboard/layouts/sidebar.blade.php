@@ -27,6 +27,14 @@
           </a>
         </li>
       </ul>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link {{ Request::is('dashboard/genres*') ? 'active' : '' }}" href="/dashboard/genres">
+            <span data-feather="grid"></span>
+            Posts Genre
+          </a>
+        </li>
+      </ul>
       @endcan
     </div>
     </nav>
