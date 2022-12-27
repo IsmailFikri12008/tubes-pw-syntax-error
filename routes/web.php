@@ -79,7 +79,7 @@ Route::get('/winter', [AnimeController::class, 'winter']);
 //     ]);
 // });
 
-Route::get('/rekomendasi', [AnimeController::class, 'rekomendasi']);
+Route::get('/rekomendasi', [AnimeController::class, 'rekomendasi'])->middleware('auth');
 
 // Route::get('/rangking', function () {
 //     return view('rangking', [
@@ -88,7 +88,7 @@ Route::get('/rekomendasi', [AnimeController::class, 'rekomendasi']);
 //     ]);
 // });
 
-Route::get('/rangking', [AnimeController::class, 'rangking']);
+Route::get('/rangking', [AnimeController::class, 'rangking'])->middleware('auth');
 
 Route::get('/detail', function () {
     return view('detail', [
@@ -99,7 +99,7 @@ Route::get('/detail', function () {
 
 Route::get('/about', function () {
     return view('about', [
-        "title" => "About",
+        "judul" => "About",
         "active" => 'about'
     ]);
 });
@@ -122,7 +122,7 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 Route::post('/logout', [LoginController::class, 'logout']);
-Route::get('/dashboard', function() {
+Route::get('/dashboard', function () {
     return view('dashboard.index');
 })->middleware('auth');
 Route::get('/dashboard/animes/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');
