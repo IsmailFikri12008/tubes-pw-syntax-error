@@ -188,11 +188,11 @@
 </div>
 
 <script>
-    const title = document.querySelector('#title');
+    const judul = document.querySelector('#judul');
     const slug = document.querySelector('#slug');
 
-    title.addEventListener('change', function() {
-        fetch('/dashboard/animes/checkSlug?title=' + title.value)
+    judul.addEventListener('change', function() {
+        fetch('/dashboard/animes/checkSlug?judul=' + judul.value)
         .then(response => response.json())
         .then(data => slug.value = data.slug)
     });

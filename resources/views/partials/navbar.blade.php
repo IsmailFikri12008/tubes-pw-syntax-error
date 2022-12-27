@@ -11,7 +11,7 @@
             </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Anime Populer
+              Season
             </a>
             <ul class="dropdown-menu">
                 <li>
@@ -25,6 +25,43 @@
                 </li>
                 <li>
                     <a class="dropdown-item" href="/winter">Anime Winter</a>
+                </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Genre
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a class="dropdown-item" href="/action">Action</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="/adventure">Adventure</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="/comedy">Comedy</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="/drama">Drama</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="/fantasy">Fantasy</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="/horror">Horror</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="/romance">Romance</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="/thriller">Thriller</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="/slice">Slice of Life</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="/sport">Sport</a>
                 </li>
             </ul>
           </li>
