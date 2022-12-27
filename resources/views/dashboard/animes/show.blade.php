@@ -30,6 +30,8 @@
                 <div class="card-body">
                     <h2>Informasi</h2>
                     <hr>
+                    <p class="card-text">Season : {!! $anime->category->name !!}</p>
+                    <p class="card-text">Genre : {!! $anime->genre->name !!}</p>
                     <p class="card-text">Tipe : {!! $anime->tipe !!}</p>
                     <p class="card-text">Episode : {!! $anime->episode !!}</p>
                     <p class="card-text">Status : {!! $anime->status !!}</p>
@@ -40,7 +42,6 @@
                     <p class="card-text">Lisensi : {!! $anime->lisensi !!}</p>
                     <p class="card-text">Studio : {!! $anime->studio !!}</p>
                     <p class="card-text">Sumber : {!! $anime->sumber !!}</p>
-                    <p class="card-text">Genre : {!! $anime->genre !!}</p>
                     <p class="card-text">Demografis : {!! $anime->demografis !!}</p>
                     <p class="card-text">Durasi : {!! $anime->durasi !!}</p>
                     <p class="card-text">Rating : {!! $anime->rating !!}</p>

@@ -3,7 +3,9 @@
 use App\Models\Anime;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AnimeController;
+use App\Http\Controllers\GenreController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AdminCategoryController;
@@ -90,6 +92,21 @@ Route::get('/rekomendasi', [AnimeController::class, 'rekomendasi'])->middleware(
 
 Route::get('/rangking', [AnimeController::class, 'rangking'])->middleware('auth');
 
+Route::get('/action', [AnimeController::class, 'action']);
+Route::get('/adventure', [AnimeController::class, 'adventure']);
+Route::get('/comedy', [AnimeController::class, 'comedy']);
+Route::get('/drama', [AnimeController::class, 'drama']);
+Route::get('/fantasy', [AnimeController::class, 'fantasy']);
+Route::get('/horror', [AnimeController::class, 'horror']);
+Route::get('/romance', [AnimeController::class, 'romance']);
+Route::get('/thriller', [AnimeController::class, 'thriller']);
+Route::get('/slice', [AnimeController::class, 'slice']);
+Route::get('/sport', [AnimeController::class, 'sport']);
+
+Route::get('/bookmark', [BookmarkController::class, 'index'])->middleware('auth');
+Route::post('/bookmark/{animes:slug}', [BookmarkController::class, 'liker'])->middleware('auth');
+Route::post('/bookmark/{animes:slug}/hapus', [BookmarkController::class, 'disliker'])->middleware('auth');
+
 Route::get('/detail', function () {
     return view('detail', [
         "title" => "Detail",
@@ -115,7 +132,7 @@ Route::get('/categories', function () {
 Route::get('/', [AnimeController::class, 'index']);
 
 // Halaman single post
-Route::get('animes/{anime:slug}', [AnimeController::class, 'show']);
+Route::get('/home/{aimes:slug}', [AnimeController::class, 'show'])->middleware('auth');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
@@ -128,3 +145,4 @@ Route::get('/dashboard', function () {
 Route::get('/dashboard/animes/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');
 Route::resource('/dashboard/animes', DashboardPostController::class)->middleware('auth');
 Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')->middleware('admin');
+Route::resource('/dashboard/genres', GenreController::class)->except('show')->middleware('admin');

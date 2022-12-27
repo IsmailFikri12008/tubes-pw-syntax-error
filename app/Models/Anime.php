@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Genre;
 
 
 class Anime extends Model
@@ -45,6 +46,10 @@ class Anime extends Model
 
     public function author() {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function genre() {
+        return $this->belongsTo(Genre::class, 'genre_id');
     }
 
     public function getRouteKeyName() {

@@ -38,6 +38,18 @@
                 @endforeach
             </select>
         </div>
+        <div  class="mb-3">
+            <label for="genre" class="form-label">Genre</label>
+            <select class="form-select" name="genre_id">
+                @foreach ($genres as $genre)
+                    @if(old('genre_id') == $genre->id)
+                        <option value="{{ $genre->id }}" selected>{{ $genre->name }}</option>
+                    @else
+                        <option value="{{ $genre->id }}">{{ $genre->name }}</option>
+                    @endif
+                @endforeach
+            </select>
+        </div>
         <div class="mb-3">
             <label for="tipe" class="form-label">Tipe</label>
             <input type="text" class="form-control @error('tipe') is-invalid @enderror" id="tipe" name="tipe" required autofocus value="{{ old('tipe') }}">
@@ -128,7 +140,7 @@
                 </div>
             @enderror
         </div>
-        <div class="mb-3">
+        {{-- <div class="mb-3">
             <label for="genre" class="form-label">Genre</label>
             <input type="text" class="form-control @error('genre') is-invalid @enderror" id="genre" name="genre" required autofocus value="{{ old('genre') }}">
             @error('genre')
@@ -136,7 +148,7 @@
                     {{ $message }}
                 </div>
             @enderror
-        </div>
+        </div> --}}
         <div class="mb-3">
             <label for="demografis" class="form-label">Demografis</label>
             <input type="text" class="form-control @error('demografis') is-invalid @enderror" id="demografis" name="demografis" required autofocus value="{{ old('demografis') }}">

@@ -18,7 +18,8 @@
                 <tr>
                     <th scope="col">No</th>
                     <th scope="col">Judul</th>
-                    <th scope="col">Category</th>
+                    <th scope="col">Season</th>
+                    <th scope="col">Genre</th>
                     <th scope="col">Tipe</th>
                     <th scope="col">Episode</th>
                     <th scope="col">Status</th>
@@ -28,7 +29,6 @@
                     <th scope="col">Lisensi</th>
                     <th scope="col">Studio</th>
                     <th scope="col">Sumber</th>
-                    <th scope="col">Genre</th>
                     <th scope="col">Demografis</th>
                     <th scope="col">Durasi</th>
                     <th scope="col">Rating</th>
@@ -40,6 +40,7 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $an->judul }}</td>
                 <td>{{ $an->category->name }}</td>
+                <td>{{ $an->genre->name }}</td>
                 <td>{{ $an->tipe }}</td>
                 <td>{{ $an->episode }}</td>
                 <td>{{ $an->status }}</td>
@@ -49,7 +50,6 @@
                 <td>{{ $an->lisensi }}</td>
                 <td>{{ $an->studio }}</td>
                 <td>{{ $an->sumber }}</td>
-                <td>{{ $an->genre }}</td>
                 <td>{{ $an->demografis }}</td>
                 <td>{{ $an->durasi }}</td>
                 <td>{{ $an->rating }}</td>

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('category_id');
+            $table->foreignId('genre_id');
             $table->String('judul');
             $table->String('slug')->unique();
             $table->String('tipe');
@@ -29,7 +30,6 @@ return new class extends Migration
             $table->String('lisensi');
             $table->String('studio');
             $table->String('sumber');
-            $table->String('genre');
             $table->String('demografis');
             $table->String('durasi');
             $table->String('rating');

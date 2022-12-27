@@ -132,9 +132,26 @@ foreach ($namaAnime as $anim) {
                             @endif
                             <div class="card-body">
                             <h5 class="card-title">{{ $anime->judul }}</h5>
-                            <p><small class="text-muted">By. <a href="/animes?author={{ $anime->author->username }}" class="text-decoration-none">{{ $anime->author->name }}</a> {{ $anime->created_at->diffForHumans() }}</small></p>
+                            <p><small class="text-muted">By. <a href="/animes?author={{ $anime->author->name }}" class="text-decoration-none">{{ $anime->author->name }}</a> {{ $anime->created_at->diffForHumans() }}</small></p>
                             <p class="card-text">{{ $anime->excerpt }}</p>
-                            <a href="/animes/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
+                            <a href="/home/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
+                            @if (DB::table('likes')->where('anime_id', '=', $anime->id)->where('user_id', '=', Auth::id())->first())
+                                <div class="bookmarked">
+                                    <span class="card-link text-decoration-none border-0 bg-white">
+                                        <i class="bi bi-bookmarks"></i>
+                                        Simpan
+                                    </span>
+                                </div>
+                            @else
+                                <form action="/bookmark/{{ $anime->slug }}" method="POST">
+                                    @csrf
+                                    <button
+                                        class="card-link text-decoration-none border-0 bg-white text-primary">
+                                        <i class="bi bi-bookmarks"></i>
+                                        Tersimpan
+                                    </button>
+                                </form>
+                            @endif
                             </div>
                         </div>
                     </div>
@@ -153,7 +170,7 @@ foreach ($namaAnime as $anim) {
         </div>
         <hr>
         <div class="col text-end">
-            <a href="/spring">Lebih Banyak.....</a>
+            <a href="/fall">Lebih Banyak.....</a>
         </div>
 
         <div class="container">
@@ -171,7 +188,24 @@ foreach ($namaAnime as $anim) {
                             <h5 class="card-title">{{ $anime->judul }}</h5>
                             <p><small class="text-muted">By. <a href="/animes?author={{ $anime->author->username }}" class="text-decoration-none">{{ $anime->author->name }}</a> {{ $anime->created_at->diffForHumans() }}</small></p>
                             <p class="card-text">{{ $anime->excerpt }}</p>
-                            <a href="/animes/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
+                            <a href="/home/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
+                            @if (DB::table('likes')->where('anime_id', '=', $anime->id)->where('user_id', '=', Auth::id())->first())
+                                <div class="bookmarked">
+                                    <span class="card-link text-decoration-none border-0 bg-white">
+                                        <i class="bi bi-bookmarks"></i>
+                                        Simpan
+                                    </span>
+                                </div>
+                            @else
+                                <form action="/bookmark/{{ $anime->slug }}" method="POST">
+                                    @csrf
+                                    <button
+                                        class="card-link text-decoration-none border-0 bg-white text-primary">
+                                        <i class="bi bi-bookmarks"></i>
+                                        Tersimpan
+                                    </button>
+                                </form>
+                            @endif
                             </div>
                         </div>
                     </div>
@@ -208,7 +242,24 @@ foreach ($namaAnime as $anim) {
                             <h5 class="card-title">{{ $anime->judul }}</h5>
                             <p><small class="text-muted">By. <a href="/animes?author={{ $anime->author->username }}" class="text-decoration-none">{{ $anime->author->name }}</a> {{ $anime->created_at->diffForHumans() }}</small></p>
                             <p class="card-text">{{ $anime->excerpt }}</p>
-                            <a href="/animes/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
+                            <a href="/home/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
+                            @if (DB::table('likes')->where('anime_id', '=', $anime->id)->where('user_id', '=', Auth::id())->first())
+                                <div class="bookmarked">
+                                    <span class="card-link text-decoration-none border-0 bg-white">
+                                        <i class="bi bi-bookmarks"></i>
+                                        Simpan
+                                    </span>
+                                </div>
+                            @else
+                                <form action="/bookmark/{{ $anime->slug }}" method="POST">
+                                    @csrf
+                                    <button
+                                        class="card-link text-decoration-none border-0 bg-white text-primary">
+                                        <i class="bi bi-bookmarks"></i>
+                                        Tersimpan
+                                    </button>
+                                </form>
+                            @endif
                             </div>
                         </div>
                     </div>
@@ -245,7 +296,24 @@ foreach ($namaAnime as $anim) {
                             <h5 class="card-title">{{ $anime->judul }}</h5>
                             <p><small class="text-muted">By. <a href="/animes?author={{ $anime->author->username }}" class="text-decoration-none">{{ $anime->author->name }}</a> {{ $anime->created_at->diffForHumans() }}</small></p>
                             <p class="card-text">{{ $anime->excerpt }}</p>
-                            <a href="/animes/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
+                            <a href="/home/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
+                            @if (DB::table('likes')->where('anime_id', '=', $anime->id)->where('user_id', '=', Auth::id())->first())
+                                <div class="bookmarked">
+                                    <span class="card-link text-decoration-none border-0 bg-white">
+                                        <i class="bi bi-bookmarks"></i>
+                                        Simpan
+                                    </span>
+                                </div>
+                            @else
+                                <form action="/bookmark/{{ $anime->slug }}" method="POST">
+                                    @csrf
+                                    <button
+                                        class="card-link text-decoration-none border-0 bg-white text-primary">
+                                        <i class="bi bi-bookmarks"></i>
+                                        Tersimpan
+                                    </button>
+                                </form>
+                            @endif
                             </div>
                         </div>
                     </div>
