@@ -25,7 +25,7 @@
                     <img src="{{ asset('storage/' . $anime->image) }}" alt="{{ $anime->category->name }}" class="img-fluid mt-3">
                 </div>
                 @else
-                    <img src="https://source.unsplash.com/1200x400?{{ $anime->category->name }}" alt="{{ $anime->category->name }}" class="img-fluid mt-3">
+                    <img src="https://kitsu.io/api/edge/anime?filter[slug]={{ $anime->category->name }}" alt="{{ $anime->category->name }}" class="img-fluid mt-3">
                 @endif
                 <div class="card-body">
                     <h2>Informasi</h2>

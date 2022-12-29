@@ -23,14 +23,14 @@
         <li class="nav-item">
           <a class="nav-link {{ Request::is('dashboard/categories*') ? 'active' : '' }}" href="/dashboard/categories">
             <span data-feather="grid"></span>
-            Posts Categories
+            Posts Season
           </a>
         </li>
       </ul>
       <ul class="nav flex-column">
         <li class="nav-item">
           <a class="nav-link {{ Request::is('dashboard/genres*') ? 'active' : '' }}" href="/dashboard/genres">
-            <span data-feather="grid"></span>
+            <span data-feather="list"></span>
             Posts Genre
           </a>
         </li>

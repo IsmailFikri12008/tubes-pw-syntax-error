@@ -10,4 +10,9 @@ class Like extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function animes()
+    {
+        return $this->hasMany(Anime::class);
+    }
 }
