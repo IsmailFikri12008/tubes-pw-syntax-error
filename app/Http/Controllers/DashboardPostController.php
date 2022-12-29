@@ -112,7 +112,8 @@ class DashboardPostController extends Controller
     {
         return view('dashboard.animes.edit', [
             'anime' => $anime,
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'genres' => Genre::all()
         ]);
     }
 

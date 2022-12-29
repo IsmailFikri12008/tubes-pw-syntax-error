@@ -24,17 +24,22 @@ class AnimeController extends Controller
             $judul = ' by ' . $author->name;
         }
 
+        if(request('genre')) {
+            $genre = Genre::firstWhere('slug', request('genre'));
+            $judul = ' in ' . $genre->name;
+        }
+
         return view ('home', [
             "judul" => "Home" . $judul,
             "active" => 'home',
             // "posts" => Post::all()
-            "animes" => Anime::latest()->filter(request(['search', 'category', 'author']))->paginate(7)->withQueryString()
+            "animes" => Anime::latest()->filter(request(['search', 'category', 'genre', 'author']))->paginate(6)->withQueryString()
         ]);
     }
 
     public function show(Anime $anime) {
         return view('detail', [
-            "judul" => "Single Anime Post",
+            "judul" => "Detail Anime",
             "active" => 'detail',
             "animes" => $anime
         ]);
@@ -96,7 +101,7 @@ class AnimeController extends Controller
 
     public function action(Anime $anime) {
         return view ('action', [
-            "judul" => "Action Genre",
+            "judul" => "Action",
             "active" => 'action',
             // "posts" => Post::all()
             "animes" => Anime::latest()->where('genre_id' , 1)->paginate(6)->withQueryString()
@@ -104,7 +109,7 @@ class AnimeController extends Controller
     }
     public function adventure(Anime $anime) {
         return view ('adventure', [
-            "judul" => "Adventure Genre",
+            "judul" => "Adventure",
             "active" => 'adventure',
             // "posts" => Post::all()
             "animes" => Anime::latest()->where('genre_id' , 2)->paginate(6)->withQueryString()
@@ -112,7 +117,7 @@ class AnimeController extends Controller
     }
     public function comedy(Anime $anime) {
         return view ('comedy', [
-            "judul" => "Comedy Genre",
+            "judul" => "Comedy",
             "active" => 'comedy',
             // "posts" => Post::all()
             "animes" => Anime::latest()->where('genre_id' , 3)->paginate(6)->withQueryString()
@@ -120,7 +125,7 @@ class AnimeController extends Controller
     }
     public function drama(Anime $anime) {
         return view ('drama', [
-            "judul" => "Drama Genre",
+            "judul" => "Drama",
             "active" => 'drama',
             // "posts" => Post::all()
             "animes" => Anime::latest()->where('genre_id' , 4)->paginate(6)->withQueryString()
@@ -128,7 +133,7 @@ class AnimeController extends Controller
     }
     public function fantasy(Anime $anime) {
         return view ('fantasy', [
-            "judul" => "Fantasy Genre",
+            "judul" => "Fantasy",
             "active" => 'fantasy',
             // "posts" => Post::all()
             "animes" => Anime::latest()->where('genre_id' , 5)->paginate(6)->withQueryString()
@@ -136,7 +141,7 @@ class AnimeController extends Controller
     }
     public function horror(Anime $anime) {
         return view ('horror', [
-            "judul" => "Horror Genre",
+            "judul" => "Horror",
             "active" => 'horror',
             // "posts" => Post::all()
             "animes" => Anime::latest()->where('genre_id' , 6)->paginate(6)->withQueryString()
@@ -144,7 +149,7 @@ class AnimeController extends Controller
     }
     public function romance(Anime $anime) {
         return view ('romance', [
-            "judul" => "Romance Genre",
+            "judul" => "Romance",
             "active" => 'romance',
             // "posts" => Post::all()
             "animes" => Anime::latest()->where('genre_id' , 7)->paginate(6)->withQueryString()
@@ -152,7 +157,7 @@ class AnimeController extends Controller
     }
     public function thriller(Anime $anime) {
         return view ('thriller', [
-            "judul" => "Thriller Genre",
+            "judul" => "Thriller",
             "active" => 'thriller',
             // "posts" => Post::all()
             "animes" => Anime::latest()->where('genre_id' , 8)->paginate(6)->withQueryString()
@@ -160,7 +165,7 @@ class AnimeController extends Controller
     }
     public function slice(Anime $anime) {
         return view ('slice', [
-            "judul" => "Slice Genre",
+            "judul" => "Slice of Life",
             "active" => 'slice',
             // "posts" => Post::all()
             "animes" => Anime::latest()->where('genre_id' , 9)->paginate(6)->withQueryString()
@@ -168,7 +173,7 @@ class AnimeController extends Controller
     }
     public function sport(Anime $anime) {
         return view ('sport', [
-            "judul" => "Sport Genre",
+            "judul" => "Sport",
             "active" => 'sport',
             // "posts" => Post::all()
             "animes" => Anime::latest()->where('genre_id' , 10)->paginate(6)->withQueryString()

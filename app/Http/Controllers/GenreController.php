@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Anime;
 use App\Models\Genre;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class GenreController extends Controller
 {
@@ -32,7 +36,9 @@ class GenreController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.genres.create', [
+            'genres' => Genre::all()
+        ]);
     }
 
     /**
@@ -43,7 +49,20 @@ class GenreController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'slug' => 'required|unique:genres',
+        ]);
+
+        if($request->file('image')) {
+            $validatedData['image'] = $request->file('image')->store('anime-images');
+        }
+
+        $validatedData['user_id'] = auth()->user()->id;
+
+        Genre::create($validatedData);
+
+        return redirect('/dashboard/genres')->with('success', 'New Genre Anime has been added!');
     }
 
     /**
@@ -52,9 +71,11 @@ class GenreController extends Controller
      * @param  \App\Models\genre  $genre
      * @return \Illuminate\Http\Response
      */
-    public function show(genre $genre)
+    public function show(Genre $genre)
     {
-        //
+        return view('dashboard.genres.show', [
+            'genres' => $genre
+        ]);
     }
 
     /**
@@ -63,9 +84,11 @@ class GenreController extends Controller
      * @param  \App\Models\genre  $genre
      * @return \Illuminate\Http\Response
      */
-    public function edit(genre $genre)
+    public function edit(Genre $genre)
     {
-        //
+        return view('dashboard.genres.edit', [
+            'genre' => $genre
+        ]);
     }
 
     /**
@@ -75,9 +98,25 @@ class GenreController extends Controller
      * @param  \App\Models\genre  $genre
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, genre $genre)
+    public function update(Request $request, Genre $genre)
     {
-        //
+        $rules = [
+            'name' => 'required|max:255',
+            'slug' => 'required|unique:genres',
+        ];
+
+        if($request->slug != $genre->slug) {
+            $rules['slug'] = 'required|unique:genres';
+        }
+
+        $validatedData = $request->validate($rules);
+
+        $validatedData['user_id'] = auth()->user()->id;
+
+        Genre::where('id', $genre->id)
+            ->update($validatedData);
+
+        return redirect('/dashboard/genres')->with('success', 'Genre has been Updated!');
     }
 
     /**
@@ -86,8 +125,19 @@ class GenreController extends Controller
      * @param  \App\Models\genre  $genre
      * @return \Illuminate\Http\Response
      */
-    public function destroy(genre $genre)
+    public function destroy(Genre $genre)
     {
-        //
+        Genre::destroy($genre->id);
+
+        return redirect('/dashboard/genres')->with('success', 'Genre has been deleted!');
+
+        // return Anime::where('id', $anime->id)->get();
     }
+
+    public function checkSlug(Request $request)
+    {
+        $slug = SlugService::createSlug(Genre::class, 'slug', $request->name);
+        return response()->json(['slug' => $slug]);
+    }
+    
 }

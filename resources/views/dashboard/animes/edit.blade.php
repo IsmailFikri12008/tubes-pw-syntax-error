@@ -43,7 +43,7 @@
             <label for="genre" class="form-label">Genre</label>
             <select class="form-select" name="genre_id">
                 @foreach ($genres as $genre)
-                    @if(old('genre_id') == $genre->id)
+                    @if(old('genre_id', $anime->genre_id) == $genre->id)
                         <option value="{{ $genre->id }}" selected>{{ $genre->name }}</option>
                     @else
                         <option value="{{ $genre->id }}">{{ $genre->name }}</option>
@@ -206,11 +206,11 @@
 </div>
 
 <script>
-    const title = document.querySelector('#title');
+    const judul = document.querySelector('#judul');
     const slug = document.querySelector('#slug');
 
-    title.addEventListener('change', function() {
-      fetch('/dashboard/animes/checkSlug?title=' + title.value)
+    judul.addEventListener('change', function() {
+      fetch('/dashboard/animes/checkSlug?judul=' + judul.value)
       .then(response => response.json())
       .then(data => slug.value = data.slug)
     });

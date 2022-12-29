@@ -73,6 +73,9 @@ foreach ($namaAnime as $anim) {
                     @if (request('author'))
                         <input type="hidden" name="author" value="{{ request('author') }}">
                     @endif
+                    @if (request('genre'))
+                        <input type="hidden" name="genre" value="{{ request('genre') }}">
+                    @endif
                     <div class="container">
                         <div class="input-group mb-3" style="position: absolute; top: 50%; left:25%; width: 50%; text-align: center; margin: auto;">
                             <input type="text" class="form-control" placeholder="Search.." name="search" value="{{ request('search') }}">
@@ -109,50 +112,54 @@ foreach ($namaAnime as $anim) {
         </div>
     </div>
 
+    <br><br>
     @if ($animes->count())
     <div class="container">
-        <div class="col text-left">
+        <div class="col text-center">
             <h2>Anime Fall</h2>
         </div>
         <hr>
         <div class="col text-end">
-            <a href="/fall">Lebih Banyak.....</a>
+            <a href="/anime-fall">Lebih Banyak.....</a>
         </div>
-
+        <br>
         <div class="container">
             <div class="row">
                 @foreach ($animes as $anime)
                     <div class="col-md-4 bb-3">
-                        <div class="card">
-                            <div class="position-absolute px-3 py-2" style="background-color: rgba(0, 0, 0, 0.7)"><a href="/animes?category={{ $anime->category->slug }}" class="text-white text-decoration-none">{{ $anime->category->name }}</a></div>
+                        <div class="card object-fit">
+                            <div class="position-absolute px-3 py-2" style="background-color: rgba(0, 0, 0, 0.7)"><a href="/{{ $anime->category->slug }}" class="text-white text-decoration-none">{{ $anime->category->name }}</a></div>
                             @if ($anime->image)
                                 <img src="{{ asset('storage/' . $anime->image) }}" alt="{{ $anime->category->name }}" class="img-fluid">
                             @else
-                                <img src="https://source.unsplash.com/500x400?{{ $anime->category->name }}" class="card-img-top" alt="{{ $anime->category->name }}">
+                                <img src="https://kitsu.io/api/edge/anime?filter[slug]={{ $anime->category->name }}" class="card-img-top" alt="{{ $anime->category->name }}">
                             @endif
                             <div class="card-body">
-                            <h5 class="card-title">{{ $anime->judul }}</h5>
-                            <p><small class="text-muted">By. <a href="/animes?author={{ $anime->author->name }}" class="text-decoration-none">{{ $anime->author->name }}</a> {{ $anime->created_at->diffForHumans() }}</small></p>
-                            <p class="card-text">{{ $anime->excerpt }}</p>
-                            <a href="/home/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
-                            @if (DB::table('likes')->where('anime_id', '=', $anime->id)->where('user_id', '=', Auth::id())->first())
-                                <div class="bookmarked">
-                                    <span class="card-link text-decoration-none border-0 bg-white">
-                                        <i class="bi bi-bookmarks"></i>
-                                        Simpan
-                                    </span>
+                                <h4 class="card-title  text-center">{{ $anime->judul }}</h4>
+                                <p class=" text-center"><small class="text-muted">By. <a href="/home?author={{ $anime->author->name }}" class="text-decoration-none">{{ $anime->author->name }}</a> {{ $anime->created_at->diffForHumans() }}</small></p>
+                                <h5 class="card-text text-center"><a href="/{{ $anime->genre->slug }}" class="text-decoration-none">{{ $anime->genre->name }}</a></h5>
+                                <p class="card-text justify">{{ $anime->excerpt }}</p>
+                                <div class="d-flex justify-content-between">
+                                    <a href="/home/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
+                                    @if (DB::table('likes')->where('anime_id', '=', $anime->id)->where('user_id', '=', Auth::id())->first())
+                                        <div class="bookmarked">
+                                            <span class="card-link text-decoration-none border-0 bg-white">
+                                                <i class="bi bi-bookmarks"></i>
+                                                Simpan
+                                            </span>
+                                        </div>
+                                    @else
+                                        <form action="/bookmark/{{ $anime->slug }}" method="POST">
+                                            @csrf
+                                            <button
+                                                class="card-link text-decoration-none border-0 bg-white text-primary">
+                                                <i class="bi bi-bookmarks"></i>
+                                                Tersimpan
+                                            </button>
+                                        </form>
+                                    @endif
                                 </div>
-                            @else
-                                <form action="/bookmark/{{ $anime->slug }}" method="POST">
-                                    @csrf
-                                    <button
-                                        class="card-link text-decoration-none border-0 bg-white text-primary">
-                                        <i class="bi bi-bookmarks"></i>
-                                        Tersimpan
-                                    </button>
-                                </form>
-                            @endif
-                            </div>
+                        </div>
                         </div>
                     </div>
                 @endforeach
@@ -163,50 +170,54 @@ foreach ($namaAnime as $anim) {
         <p class="text-center fs-4">No Post Found.</p>
     @endif
 
+    <br><br>
     @if ($animes->count())
     <div class="container">
-        <div class="col text-left">
+        <div class="col text-center">
             <h2>Anime Spring</h2>
         </div>
         <hr>
         <div class="col text-end">
-            <a href="/fall">Lebih Banyak.....</a>
+            <a href="/anime-spring">Lebih Banyak.....</a>
         </div>
-
+        <br>
         <div class="container">
             <div class="row">
                 @foreach ($animes as $anime)
                     <div class="col-md-4 bb-3">
-                        <div class="card">
-                            <div class="position-absolute px-3 py-2" style="background-color: rgba(0, 0, 0, 0.7)"><a href="/animes?category={{ $anime->category->slug }}" class="text-white text-decoration-none">{{ $anime->category->name }}</a></div>
+                        <div class="card object-fit">
+                            <div class="position-absolute px-3 py-2" style="background-color: rgba(0, 0, 0, 0.7)"><a href="/{{ $anime->category->slug }}" class="text-white text-decoration-none">{{ $anime->category->name }}</a></div>
                             @if ($anime->image)
                                 <img src="{{ asset('storage/' . $anime->image) }}" alt="{{ $anime->category->name }}" class="img-fluid">
                             @else
-                                <img src="https://source.unsplash.com/500x400?{{ $anime->category->name }}" class="card-img-top" alt="{{ $anime->category->name }}">
+                                <img src="https://kitsu.io/api/edge/anime?filter[slug]={{ $anime->category->name }}" class="card-img-top" alt="{{ $anime->category->name }}">
                             @endif
                             <div class="card-body">
-                            <h5 class="card-title">{{ $anime->judul }}</h5>
-                            <p><small class="text-muted">By. <a href="/animes?author={{ $anime->author->username }}" class="text-decoration-none">{{ $anime->author->name }}</a> {{ $anime->created_at->diffForHumans() }}</small></p>
-                            <p class="card-text">{{ $anime->excerpt }}</p>
-                            <a href="/home/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
-                            @if (DB::table('likes')->where('anime_id', '=', $anime->id)->where('user_id', '=', Auth::id())->first())
-                                <div class="bookmarked">
-                                    <span class="card-link text-decoration-none border-0 bg-white">
-                                        <i class="bi bi-bookmarks"></i>
-                                        Simpan
-                                    </span>
+                                <h4 class="card-title  text-center">{{ $anime->judul }}</h4>
+                                <p class=" text-center"><small class="text-muted">By. <a href="/animes?author={{ $anime->author->name }}" class="text-decoration-none">{{ $anime->author->name }}</a> {{ $anime->created_at->diffForHumans() }}</small></p>
+                                <h5 class="card-text text-center"><a href="/{{ $anime->genre->slug }}" class="text-decoration-none">{{ $anime->genre->name }}</a></h5>
+                                <p class="card-text justify">{{ $anime->excerpt }}</p>
+                                <div class="d-flex justify-content-between">
+                                    <a href="/home/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
+                                    @if (DB::table('likes')->where('anime_id', '=', $anime->id)->where('user_id', '=', Auth::id())->first())
+                                        <div class="bookmarked">
+                                            <span class="card-link text-decoration-none border-0 bg-white">
+                                                <i class="bi bi-bookmarks"></i>
+                                                Simpan
+                                            </span>
+                                        </div>
+                                    @else
+                                        <form action="/bookmark/{{ $anime->slug }}" method="POST">
+                                            @csrf
+                                            <button
+                                                class="card-link text-decoration-none border-0 bg-white text-primary">
+                                                <i class="bi bi-bookmarks"></i>
+                                                Tersimpan
+                                            </button>
+                                        </form>
+                                    @endif
                                 </div>
-                            @else
-                                <form action="/bookmark/{{ $anime->slug }}" method="POST">
-                                    @csrf
-                                    <button
-                                        class="card-link text-decoration-none border-0 bg-white text-primary">
-                                        <i class="bi bi-bookmarks"></i>
-                                        Tersimpan
-                                    </button>
-                                </form>
-                            @endif
-                            </div>
+                        </div>
                         </div>
                     </div>
                 @endforeach
@@ -217,50 +228,54 @@ foreach ($namaAnime as $anim) {
         <p class="text-center fs-4">No Post Found.</p>
     @endif
 
+    <br><br>
     @if ($animes->count())
     <div class="container">
-        <div class="col text-left">
+        <div class="col text-center">
             <h2>Anime Summer</h2>
         </div>
         <hr>
         <div class="col text-end">
-            <a href="/summer">Lebih Banyak.....</a>
+            <a href="/anime-summer">Lebih Banyak.....</a>
         </div>
-
+        <br>
         <div class="container">
             <div class="row">
                 @foreach ($animes as $anime)
                     <div class="col-md-4 bb-3">
-                        <div class="card">
-                            <div class="position-absolute px-3 py-2" style="background-color: rgba(0, 0, 0, 0.7)"><a href="/animes?category={{ $anime->category->slug }}" class="text-white text-decoration-none">{{ $anime->category->name }}</a></div>
+                        <div class="card object-fit">
+                            <div class="position-absolute px-3 py-2" style="background-color: rgba(0, 0, 0, 0.7)"><a href="/{{ $anime->category->slug }}" class="text-white text-decoration-none">{{ $anime->category->name }}</a></div>
                             @if ($anime->image)
                                 <img src="{{ asset('storage/' . $anime->image) }}" alt="{{ $anime->category->name }}" class="img-fluid">
                             @else
-                                <img src="https://source.unsplash.com/500x400?{{ $anime->category->name }}" class="card-img-top" alt="{{ $anime->category->name }}">
+                                <img src="https://kitsu.io/api/edge/anime?filter[slug]={{ $anime->category->name }}" class="card-img-top" alt="{{ $anime->category->name }}">
                             @endif
                             <div class="card-body">
-                            <h5 class="card-title">{{ $anime->judul }}</h5>
-                            <p><small class="text-muted">By. <a href="/animes?author={{ $anime->author->username }}" class="text-decoration-none">{{ $anime->author->name }}</a> {{ $anime->created_at->diffForHumans() }}</small></p>
-                            <p class="card-text">{{ $anime->excerpt }}</p>
-                            <a href="/home/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
-                            @if (DB::table('likes')->where('anime_id', '=', $anime->id)->where('user_id', '=', Auth::id())->first())
-                                <div class="bookmarked">
-                                    <span class="card-link text-decoration-none border-0 bg-white">
-                                        <i class="bi bi-bookmarks"></i>
-                                        Simpan
-                                    </span>
+                                <h4 class="card-title  text-center">{{ $anime->judul }}</h4>
+                                <p class=" text-center"><small class="text-muted">By. <a href="/animes?author={{ $anime->author->name }}" class="text-decoration-none">{{ $anime->author->name }}</a> {{ $anime->created_at->diffForHumans() }}</small></p>
+                                <h5 class="card-text text-center"><a href="/{{ $anime->genre->slug }}" class="text-decoration-none">{{ $anime->genre->name }}</a></h5>
+                                <p class="card-text justify">{{ $anime->excerpt }}</p>
+                                <div class="d-flex justify-content-between">
+                                    <a href="/home/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
+                                    @if (DB::table('likes')->where('anime_id', '=', $anime->id)->where('user_id', '=', Auth::id())->first())
+                                        <div class="bookmarked">
+                                            <span class="card-link text-decoration-none border-0 bg-white">
+                                                <i class="bi bi-bookmarks"></i>
+                                                Simpan
+                                            </span>
+                                        </div>
+                                    @else
+                                        <form action="/bookmark/{{ $anime->slug }}" method="POST">
+                                            @csrf
+                                            <button
+                                                class="card-link text-decoration-none border-0 bg-white text-primary">
+                                                <i class="bi bi-bookmarks"></i>
+                                                Tersimpan
+                                            </button>
+                                        </form>
+                                    @endif
                                 </div>
-                            @else
-                                <form action="/bookmark/{{ $anime->slug }}" method="POST">
-                                    @csrf
-                                    <button
-                                        class="card-link text-decoration-none border-0 bg-white text-primary">
-                                        <i class="bi bi-bookmarks"></i>
-                                        Tersimpan
-                                    </button>
-                                </form>
-                            @endif
-                            </div>
+                        </div>
                         </div>
                     </div>
                 @endforeach
@@ -271,50 +286,54 @@ foreach ($namaAnime as $anim) {
         <p class="text-center fs-4">No Post Found.</p>
     @endif
 
+    <br><br>
     @if ($animes->count())
     <div class="container">
-        <div class="col text-left">
+        <div class="col text-center">
             <h2>Anime Winter</h2>
         </div>
         <hr>
         <div class="col text-end">
-            <a href="/winter">Lebih Banyak.....</a>
+            <a href="/anime-winter">Lebih Banyak.....</a>
         </div>
-
+        <br>
         <div class="container">
             <div class="row">
                 @foreach ($animes as $anime)
                     <div class="col-md-4 bb-3">
-                        <div class="card">
-                            <div class="position-absolute px-3 py-2" style="background-color: rgba(0, 0, 0, 0.7)"><a href="/animes?category={{ $anime->category->slug }}" class="text-white text-decoration-none">{{ $anime->category->name }}</a></div>
+                        <div class="card object-fit">
+                            <div class="position-absolute px-3 py-2" style="background-color: rgba(0, 0, 0, 0.7)"><a href="/{{ $anime->category->slug }}" class="text-white text-decoration-none">{{ $anime->category->name }}</a></div>
                             @if ($anime->image)
                                 <img src="{{ asset('storage/' . $anime->image) }}" alt="{{ $anime->category->name }}" class="img-fluid">
                             @else
-                                <img src="https://source.unsplash.com/500x400?{{ $anime->category->name }}" class="card-img-top" alt="{{ $anime->category->name }}">
+                                <img src="https://kitsu.io/api/edge/anime?filter[slug]={{ $anime->category->name }}" class="card-img-top" alt="{{ $anime->category->name }}">
                             @endif
                             <div class="card-body">
-                            <h5 class="card-title">{{ $anime->judul }}</h5>
-                            <p><small class="text-muted">By. <a href="/animes?author={{ $anime->author->username }}" class="text-decoration-none">{{ $anime->author->name }}</a> {{ $anime->created_at->diffForHumans() }}</small></p>
-                            <p class="card-text">{{ $anime->excerpt }}</p>
-                            <a href="/home/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
-                            @if (DB::table('likes')->where('anime_id', '=', $anime->id)->where('user_id', '=', Auth::id())->first())
-                                <div class="bookmarked">
-                                    <span class="card-link text-decoration-none border-0 bg-white">
-                                        <i class="bi bi-bookmarks"></i>
-                                        Simpan
-                                    </span>
+                                <h4 class="card-title  text-center">{{ $anime->judul }}</h4>
+                                <p class=" text-center"><small class="text-muted">By. <a href="/animes?author={{ $anime->author->name }}" class="text-decoration-none">{{ $anime->author->name }}</a> {{ $anime->created_at->diffForHumans() }}</small></p>
+                                <h5 class="card-text text-center"><a href="/{{ $anime->genre->slug }}" class="text-decoration-none">{{ $anime->genre->name }}</a></h5>
+                                <p class="card-text justify">{{ $anime->excerpt }}</p>
+                                <div class="d-flex justify-content-between">
+                                    <a href="/home/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
+                                    @if (DB::table('likes')->where('anime_id', '=', $anime->id)->where('user_id', '=', Auth::id())->first())
+                                        <div class="bookmarked">
+                                            <span class="card-link text-decoration-none border-0 bg-white">
+                                                <i class="bi bi-bookmarks"></i>
+                                                Simpan
+                                            </span>
+                                        </div>
+                                    @else
+                                        <form action="/bookmark/{{ $anime->slug }}" method="POST">
+                                            @csrf
+                                            <button
+                                                class="card-link text-decoration-none border-0 bg-white text-primary">
+                                                <i class="bi bi-bookmarks"></i>
+                                                Tersimpan
+                                            </button>
+                                        </form>
+                                    @endif
                                 </div>
-                            @else
-                                <form action="/bookmark/{{ $anime->slug }}" method="POST">
-                                    @csrf
-                                    <button
-                                        class="card-link text-decoration-none border-0 bg-white text-primary">
-                                        <i class="bi bi-bookmarks"></i>
-                                        Tersimpan
-                                    </button>
-                                </form>
-                            @endif
-                            </div>
+                        </div>
                         </div>
                     </div>
                 @endforeach
@@ -324,365 +343,5 @@ foreach ($namaAnime as $anim) {
     @else
         <p class="text-center fs-4">No Post Found.</p>
     @endif
-    {{-- <div class="d-flex justify-content-end">
-        {{ $animes->links() }}
-    </div> --}}
-
-    {{-- @if ($animes->count())
-    <div class="container">
-        <div class="col text-left">
-            <h2>Anime Fall</h2>
-        </div>
-        <hr>
-        <div class="col text-end">
-            <a href="/fall">Lebih Banyak.....</a>
-        </div>
-
-        <div class="card mb-3">
-            @if ($animes[0]->image)
-                <div style="max-height: 400px; overflow: hidden;">
-                    <img src="{{ asset('storage/' . $animes[0]->image) }}" alt="{{ $animes[0]->category->name }}" class="img-fluid">
-                </div>
-            @else
-                <img src="https://source.unsplash.com/1200x400?{{ $animes[0]->category->name }}" class="card-img-top" alt="{{ $animes[0]->category->name }}">
-            @endif
-                <div class="card-body text-center">
-                    <h3 class="card-title"><a href="/posts/{{ $animes[0]->slug }}" class="text-decoration-none text-dark">{{ $animes[0]->title }}</a></h3>
-                    <p><small class="text-muted">By. <a href="/posts?author={{ $animes[0]->author->username }}" class="text-decoration-none">{{ $animes[0]->author->name }}</a> in <a href="/posts?category={{ $animes[0]->category->slug }}" class="text-decoration-none">{{ $animes[0]->category->name }}</a> {{ $animes[0]->created_at->diffForHumans() }}</small></p>
-                    <p class="card-text">{{ $animes[0]->excerpt }}</p>
-                    <a href="/posts/{{ $animes[0]->slug }}" class="text-decoration-none btn btn-primary">Read more</a>
-                </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                @foreach ($animes->skip(1) as $anime)
-                    <div class="col-md-4 bb-3">
-                        <div class="card">
-                            <div class="position-absolute px-3 py-2" style="background-color: rgba(0, 0, 0, 0.7)"><a href="/posts?category={{ $anime->category->slug }}" class="text-white text-decoration-none">{{ $anime->category->name }}</a></div>
-                            @if ($anime->image)
-                                <img src="{{ asset('storage/' . $anime->image) }}" alt="{{ $anime->category->name }}" class="img-fluid">
-                            @else
-                                <img src="https://source.unsplash.com/500x400?{{ $anime->category->name }}" class="card-img-top" alt="{{ $anime->category->name }}">
-                            @endif
-                            <div class="card-body">
-                            <h5 class="card-title">{{ $anime->title }}</h5>
-                            <p><small class="text-muted">By. <a href="/posts?author={{ $anime->author->username }}" class="text-decoration-none">{{ $anime->author->name }}</a> {{ $anime->created_at->diffForHumans() }}</small></p>
-                            <p class="card-text">{{ $anime->excerpt }}</p>
-                            <a href="/posts/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
-    @else
-        <p class="text-center fs-4">No Post Found.</p>
-    @endif
-
-    @if ($animes->count())
-    <div class="container">
-        <div class="col text-left">
-            <h2>Anime Fall</h2>
-        </div>
-        <hr>
-        <div class="col text-end">
-            <a href="/fall">Lebih Banyak.....</a>
-        </div>
-
-        <div class="card mb-3">
-            @if ($animes[0]->image)
-                <div style="max-height: 400px; overflow: hidden;">
-                    <img src="{{ asset('storage/' . $animes[0]->image) }}" alt="{{ $animes[0]->category->name }}" class="img-fluid">
-                </div>
-            @else
-                <img src="https://source.unsplash.com/1200x400?{{ $animes[0]->category->name }}" class="card-img-top" alt="{{ $animes[0]->category->name }}">
-            @endif
-                <div class="card-body text-center">
-                    <h3 class="card-title"><a href="/posts/{{ $animes[0]->slug }}" class="text-decoration-none text-dark">{{ $animes[0]->title }}</a></h3>
-                    <p><small class="text-muted">By. <a href="/posts?author={{ $animes[0]->author->username }}" class="text-decoration-none">{{ $animes[0]->author->name }}</a> in <a href="/posts?category={{ $animes[0]->category->slug }}" class="text-decoration-none">{{ $animes[0]->category->name }}</a> {{ $animes[0]->created_at->diffForHumans() }}</small></p>
-                    <p class="card-text">{{ $animes[0]->excerpt }}</p>
-                    <a href="/posts/{{ $animes[0]->slug }}" class="text-decoration-none btn btn-primary">Read more</a>
-                </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                @foreach ($animes->skip(1) as $anime)
-                    <div class="col-md-4 bb-3">
-                        <div class="card">
-                            <div class="position-absolute px-3 py-2" style="background-color: rgba(0, 0, 0, 0.7)"><a href="/posts?category={{ $anime->category->slug }}" class="text-white text-decoration-none">{{ $anime->category->name }}</a></div>
-                            @if ($anime->image)
-                            <img src="{{ asset('storage/' . $anime->image) }}" alt="{{ $anime->category->name }}" class="img-fluid">
-                            @else
-                                <img src="https://source.unsplash.com/500x400?{{ $anime->category->name }}" class="card-img-top" alt="{{ $anime->category->name }}">
-                            @endif
-                            <div class="card-body">
-                            <h5 class="card-title">{{ $anime->title }}</h5>
-                            <p><small class="text-muted">By. <a href="/posts?author={{ $anime->author->username }}" class="text-decoration-none">{{ $anime->author->name }}</a> {{ $anime->created_at->diffForHumans() }}</small></p>
-                            <p class="card-text">{{ $anime->excerpt }}</p>
-                            <a href="/posts/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
-    @else
-    <p class="text-center fs-4">No Post Found.</p>
-    @endif
-
-    @if ($animes->count())
-    <div class="container">
-        <div class="col text-left">
-            <h2>Anime Fall</h2>
-        </div>
-        <hr>
-        <div class="col text-end">
-            <a href="/fall">Lebih Banyak.....</a>
-        </div>
-
-        <div class="card mb-3">
-            @if ($animes[0]->image)
-                <div style="max-height: 400px; overflow: hidden;">
-                    <img src="{{ asset('storage/' . $animes[0]->image) }}" alt="{{ $animes[0]->category->name }}" class="img-fluid">
-                </div>
-            @else
-                <img src="https://source.unsplash.com/1200x400?{{ $animes[0]->category->name }}" class="card-img-top" alt="{{ $animes[0]->category->name }}">
-            @endif
-                <div class="card-body text-center">
-                    <h3 class="card-title"><a href="/posts/{{ $animes[0]->slug }}" class="text-decoration-none text-dark">{{ $animes[0]->title }}</a></h3>
-                    <p><small class="text-muted">By. <a href="/posts?author={{ $animes[0]->author->username }}" class="text-decoration-none">{{ $animes[0]->author->name }}</a> in <a href="/posts?category={{ $animes[0]->category->slug }}" class="text-decoration-none">{{ $animes[0]->category->name }}</a> {{ $animes[0]->created_at->diffForHumans() }}</small></p>
-                    <p class="card-text">{{ $animes[0]->excerpt }}</p>
-                    <a href="/posts/{{ $animes[0]->slug }}" class="text-decoration-none btn btn-primary">Read more</a>
-                </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                @foreach ($animes->skip(1) as $anime)
-                    <div class="col-md-4 bb-3">
-                        <div class="card">
-                            <div class="position-absolute px-3 py-2" style="background-color: rgba(0, 0, 0, 0.7)"><a href="/posts?category={{ $anime->category->slug }}" class="text-white text-decoration-none">{{ $anime->category->name }}</a></div>
-                            @if ($anime->image)
-                                <img src="{{ asset('storage/' . $anime->image) }}" alt="{{ $anime->category->name }}" class="img-fluid">
-                            @else
-                                <img src="https://source.unsplash.com/500x400?{{ $anime->category->name }}" class="card-img-top" alt="{{ $anime->category->name }}">
-                            @endif
-                            <div class="card-body">
-                            <h5 class="card-title">{{ $anime->title }}</h5>
-                            <p><small class="text-muted">By. <a href="/posts?author={{ $anime->author->username }}" class="text-decoration-none">{{ $anime->author->name }}</a> {{ $anime->created_at->diffForHumans() }}</small></p>
-                            <p class="card-text">{{ $anime->excerpt }}</p>
-                            <a href="/posts/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
-
-    @else
-        <p class="text-center fs-4">No Post Found.</p>
-    @endif --}}
-
-    {{-- <div class="container">
-        <div class="row mb-4 pt-4">
-            <div class="col text-left">
-                <h2>Fall 2022 Anime</h2>
-            </div>
-        </div>
-        <hr>
-        <div class="row mb-4 pt-4">
-            <div class="col text-end">
-                <a href="/">Lebih Banyak.....</a>
-            </div>
-        </div>
-
-        <div class="row mb-4">
-            <div class="col-md">
-                <div class="card">
-                    <img src="https://i.pinimg.com/originals/bc/ac/b4/bcacb44ddb47d02a6ba78a6c8a990871.jpg" alt="" style="height: 250px;">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md">
-                <div class="card">
-                    <img src="https://i.pinimg.com/originals/bc/ac/b4/bcacb44ddb47d02a6ba78a6c8a990871.jpg" alt="" style="height: 250px;">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md">
-                <div class="card">
-                    <img src="https://i.pinimg.com/originals/bc/ac/b4/bcacb44ddb47d02a6ba78a6c8a990871.jpg" alt="" style="height: 250px;">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md">
-                <div class="card">
-                    <img src="https://i.pinimg.com/originals/bc/ac/b4/bcacb44ddb47d02a6ba78a6c8a990871.jpg" alt="" style="height: 250px;">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row mb-4 pt-4">
-            <div class="col text-left">
-                <h2>{{ $category[0]->name }}</h2>
-            </div>
-        </div>
-        <hr>
-        <div class="row mb-4 pt-4">
-            <div class="col text-end">
-                <a href="/">Lebih Banyak.....</a>
-            </div>
-        </div>
-
-        <div class="row mb-4">
-            <div class="col-md">
-                <div class="card">
-                    <img src="https://i.pinimg.com/originals/bc/ac/b4/bcacb44ddb47d02a6ba78a6c8a990871.jpg" alt="" style="height: 250px;">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md">
-                <div class="card">
-                    <img src="https://i.pinimg.com/originals/bc/ac/b4/bcacb44ddb47d02a6ba78a6c8a990871.jpg" alt="" style="height: 250px;">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md">
-                <div class="card">
-                    <img src="https://i.pinimg.com/originals/bc/ac/b4/bcacb44ddb47d02a6ba78a6c8a990871.jpg" alt="" style="height: 250px;">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md">
-                <div class="card">
-                    <img src="https://i.pinimg.com/originals/bc/ac/b4/bcacb44ddb47d02a6ba78a6c8a990871.jpg" alt="" style="height: 250px;">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row mb-4 pt-4">
-            <div class="col text-left">
-                <h2>Summer 2022 Anime</h2>
-            </div>
-        </div>
-        <hr>
-        <div class="row mb-4 pt-4">
-            <div class="col text-end">
-                <a href="/">Lebih Banyak.....</a>
-            </div>
-        </div>
-
-        <div class="row mb-4">
-            <div class="col-md">
-                <div class="card">
-                    <img src="https://i.pinimg.com/originals/bc/ac/b4/bcacb44ddb47d02a6ba78a6c8a990871.jpg" alt="" style="height: 250px;">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md">
-                <div class="card">
-                    <img src="https://i.pinimg.com/originals/bc/ac/b4/bcacb44ddb47d02a6ba78a6c8a990871.jpg" alt="" style="height: 250px;">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md">
-                <div class="card">
-                    <img src="https://i.pinimg.com/originals/bc/ac/b4/bcacb44ddb47d02a6ba78a6c8a990871.jpg" alt="" style="height: 250px;">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md">
-                <div class="card">
-                    <img src="https://i.pinimg.com/originals/bc/ac/b4/bcacb44ddb47d02a6ba78a6c8a990871.jpg" alt="" style="height: 250px;">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row mb-4 pt-4">
-            <div class="col text-left">
-                <h2>Winter 2022 Anime</h2>
-            </div>
-        </div>
-        <hr>
-        <div class="row mb-4 pt-4">
-            <div class="col text-end">
-                <a href="/">Lebih Banyak.....</a>
-            </div>
-        </div>
-
-        <div class="row mb-4">
-            <div class="col-md">
-                <div class="card">
-                    <img src="https://i.pinimg.com/originals/bc/ac/b4/bcacb44ddb47d02a6ba78a6c8a990871.jpg" alt="" style="height: 250px;">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md">
-                <div class="card">
-                    <img src="https://i.pinimg.com/originals/bc/ac/b4/bcacb44ddb47d02a6ba78a6c8a990871.jpg" alt="" style="height: 250px;">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md">
-                <div class="card">
-                    <img src="https://i.pinimg.com/originals/bc/ac/b4/bcacb44ddb47d02a6ba78a6c8a990871.jpg" alt="" style="height: 250px;">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md">
-                <div class="card">
-                    <img src="https://i.pinimg.com/originals/bc/ac/b4/bcacb44ddb47d02a6ba78a6c8a990871.jpg" alt="" style="height: 250px;">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
-
+    <br><br>
 @endsection

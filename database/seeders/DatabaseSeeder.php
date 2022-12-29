@@ -26,8 +26,29 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Ismail Fikri',
-            // 'username' => 'ismail fikri',
+            'username' => 'ismail fikri',
             'email' => '203040008@mail.unpas.ac.id',
+            'password' => bcrypt('12345')
+        ]);
+
+        User::create([
+            'name' => 'Fikri Ridwan',
+            'username' => 'fikri ridwan',
+            'email' => '203040001@mail.unpas.ac.id',
+            'password' => bcrypt('12345')
+        ]);
+
+        User::create([
+            'name' => 'Nur Ihsan',
+            'username' => 'nur ihsan',
+            'email' => '203040025@mail.unpas.ac.id',
+            'password' => bcrypt('12345')
+        ]);
+
+        User::create([
+            'name' => 'Salsabila',
+            'username' => 'salsabila',
+            'email' => '203040028@mail.unpas.ac.id',
             'password' => bcrypt('12345')
         ]);
 
@@ -68,17 +89,17 @@ class DatabaseSeeder extends Seeder
 
         Genre::create([
             'name' => 'Adventure',
-            'slug' => 'Adventure'
+            'slug' => 'adventure'
         ]);
 
         Genre::create([
             'name' => 'Comedy',
-            'slug' => 'Comedy'
+            'slug' => 'comedy'
         ]);
 
         Genre::create([
             'name' => 'Drama',
-            'slug' => 'Drama'
+            'slug' => 'drama'
         ]);
 
         Genre::create([

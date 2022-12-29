@@ -1,12 +1,14 @@
 <?php
 
 use App\Models\Anime;
+use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AnimeController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\DashboardPostController;
@@ -41,7 +43,7 @@ Route::resource('/', HomeController::class);
 //     ]);
 // });
 
-Route::get('/fall', [AnimeController::class, 'fall']);
+Route::get('/anime-fall', [AnimeController::class, 'fall']);
 
 // Route::get('/summer', function () {
 //     return view('summer', [
@@ -51,7 +53,7 @@ Route::get('/fall', [AnimeController::class, 'fall']);
 //     ]);
 // });
 
-Route::get('/summer', [AnimeController::class, 'summer']);
+Route::get('/anime-summer', [AnimeController::class, 'summer']);
 
 // Route::get('/spring', function () {
 //     return view('spring', [
@@ -61,7 +63,7 @@ Route::get('/summer', [AnimeController::class, 'summer']);
 //     ]);
 // });
 
-Route::get('/spring', [AnimeController::class, 'spring']);
+Route::get('/anime-spring', [AnimeController::class, 'spring']);
 
 // Route::get('/winter', function () {
 //     return view('winter', [
@@ -71,7 +73,7 @@ Route::get('/spring', [AnimeController::class, 'spring']);
 //     ]);
 // });
 
-Route::get('/winter', [AnimeController::class, 'winter']);
+Route::get('/anime-winter', [AnimeController::class, 'winter']);
 
 // Route::get('/rekomendasi', function () {
 //     return view('rekomendasi', [
@@ -100,7 +102,7 @@ Route::get('/fantasy', [AnimeController::class, 'fantasy']);
 Route::get('/horror', [AnimeController::class, 'horror']);
 Route::get('/romance', [AnimeController::class, 'romance']);
 Route::get('/thriller', [AnimeController::class, 'thriller']);
-Route::get('/slice', [AnimeController::class, 'slice']);
+Route::get('/slice-of-life', [AnimeController::class, 'slice']);
 Route::get('/sport', [AnimeController::class, 'sport']);
 
 Route::get('/bookmark', [BookmarkController::class, 'index'])->middleware('auth');
@@ -110,7 +112,8 @@ Route::post('/bookmark/{animes:slug}/hapus', [BookmarkController::class, 'dislik
 Route::get('/detail', function () {
     return view('detail', [
         "title" => "Detail",
-        "active" => 'detail'
+        "active" => 'detail',
+        "animes" => Anime::all()
     ]);
 });
 
@@ -130,9 +133,10 @@ Route::get('/categories', function () {
 });
 
 Route::get('/', [AnimeController::class, 'index']);
+Route::get('/home', [AnimeController::class, 'index']);
 
 // Halaman single post
-Route::get('/home/{aimes:slug}', [AnimeController::class, 'show'])->middleware('auth');
+Route::get('/home/{animes:slug}', [AnimeController::class, 'show'])->middleware('auth');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
@@ -140,9 +144,12 @@ Route::get('/register', [RegisterController::class, 'index'])->middleware('guest
 Route::post('/register', [RegisterController::class, 'store']);
 Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/dashboard', function () {
-    return view('dashboard.index');
+    return view('dashboard.index', [
+        'animes' => Anime::all()
+    ]);
 })->middleware('auth');
 Route::get('/dashboard/animes/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');
 Route::resource('/dashboard/animes', DashboardPostController::class)->middleware('auth');
 Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')->middleware('admin');
 Route::resource('/dashboard/genres', GenreController::class)->except('show')->middleware('admin');
+Route::get('/dashboard/genres/checkSlug', [GenrePostController::class, 'checkSlug'])->middleware('auth');

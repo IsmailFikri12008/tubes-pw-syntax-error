@@ -15,16 +15,19 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                    <a class="dropdown-item" href="/fall">Anime Fall</a>
+                    <a class="dropdown-item" href="/anime-fall">Anime Fall</a>
                 </li>
+                <li><hr class="dropdown-divider"></li>
                 <li>
-                    <a class="dropdown-item" href="/spring">Anime Spring</a>
+                    <a class="dropdown-item" href="/anime-spring">Anime Spring</a>
                 </li>
+                <li><hr class="dropdown-divider"></li>
                 <li>
-                    <a class="dropdown-item" href="/summer">Anime Summer</a>
+                    <a class="dropdown-item" href="/anime-summer">Anime Summer</a>
                 </li>
+                <li><hr class="dropdown-divider"></li>
                 <li>
-                    <a class="dropdown-item" href="/winter">Anime Winter</a>
+                    <a class="dropdown-item" href="/anime-winter">Anime Winter</a>
                 </li>
             </ul>
           </li>
@@ -36,32 +39,41 @@
                 <li>
                     <a class="dropdown-item" href="/action">Action</a>
                 </li>
+                <li><hr class="dropdown-divider"></li>
                 <li>
                     <a class="dropdown-item" href="/adventure">Adventure</a>
                 </li>
+                <li><hr class="dropdown-divider"></li>
                 <li>
                     <a class="dropdown-item" href="/comedy">Comedy</a>
                 </li>
+                <li><hr class="dropdown-divider"></li>
                 <li>
                     <a class="dropdown-item" href="/drama">Drama</a>
                 </li>
+                <li><hr class="dropdown-divider"></li>
                 <li>
                     <a class="dropdown-item" href="/fantasy">Fantasy</a>
                 </li>
+                <li><hr class="dropdown-divider"></li>
                 <li>
                     <a class="dropdown-item" href="/horror">Horror</a>
                 </li>
+                <li><hr class="dropdown-divider"></li>
                 <li>
                     <a class="dropdown-item" href="/romance">Romance</a>
                 </li>
+                <li><hr class="dropdown-divider"></li>
                 <li>
-                    <a class="dropdown-item" href="/thriller">Thriller</a>
+                    <a class="dropdown-item" href="/slice-of-life">Slice of Life</a>
                 </li>
-                <li>
-                    <a class="dropdown-item" href="/slice">Slice of Life</a>
-                </li>
+                <li><hr class="dropdown-divider"></li>
                 <li>
                     <a class="dropdown-item" href="/sport">Sport</a>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <a class="dropdown-item" href="/thriller">Thriller</a>
                 </li>
             </ul>
           </li>
@@ -80,12 +92,16 @@
                     Welcome Back, {{ auth()->user()->name }}
                     </a>
                     <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/dashboard"><i class="bi bi-layout-text-sidebar-reverse"></i> My Dashboard</a></li>
-                    <li><a class="dropdown-item" href="/bookmark"><i class="bi bi-bookmarks"></i> Simpan</a></li>
-                    <form action="/logout" method="post">
-                        @csrf
-                        <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right"></i> Logout</button>
-                    </form>
+                        @can('admin')
+                        <li><a class="dropdown-item" href="/dashboard"><i class="bi bi-layout-text-sidebar-reverse"></i> My Dashboard</a></li>
+                        @endcan
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/bookmark"><i class="bi bi-bookmarks"></i> Simpan</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <form action="/logout" method="post">
+                            @csrf
+                            <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right"></i> Logout</button>
+                        </form>
                     </ul>
                 </li>
                 @else

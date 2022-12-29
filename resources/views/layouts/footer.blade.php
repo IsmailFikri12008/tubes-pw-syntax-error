@@ -14,16 +14,16 @@
             <a href="about" style="text-decoration: none; color:#fff;">About</a> | <a href="login" style="text-decoration: none; color:#fff;"> Login </a> | <a href="register" style="text-decoration: none; color:#fff;"> Sign Up </a>
           </p>
           <div class="col text-start">
-              <a href="" style="text-decoration: none;">
+              <a href="https://discord.com/invite/wpu" style="text-decoration: none;">
                 <img src="/storage/footer/discord.png" alt="Discord" style="height:50px; padding-left:10px; padding-right:10px;">
               </a>
-              <a href="" style="text-decoration: none;">
+              <a href="https://github.com/IsmailFikri12008/tubes-pw-syntax-error" style="text-decoration: none;">
                 <img src="/storage/footer/github.png" alt="Github" style="height:50px; padding-left:10px; padding-right:10px;">
               </a>
-              <a href="" style="text-decoration: none;">
+              <a href="https://www.instagram.com/sandhikagalih/?hl=id" style="text-decoration: none;">
                 <img src="/storage/footer/instagram.png" alt="Instagram" style="height:50px; padding-left:10px; padding-right:10px;">
               </a>
-              <a href="" style="text-decoration: none;">
+              <a href="https://www.youtube.com/@sandhikagalihWPU" style="text-decoration: none;">
                 <img src="/storage/footer/youtube.png" alt="YouTube" style="height:50px; padding-left:10px; padding-right:10px;">
               </a>
           </div>

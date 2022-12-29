@@ -10,12 +10,15 @@
 <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
-    <!-- Custom styles for this template -->
-    <link href="/css/dashboard.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="/css/dashboard.css" rel="stylesheet">
 
-    <!-- trix editor -->
-    <link rel="stylesheet" type="text/css" href="/css/trix.css">
-    <script type="text/javascript" src="/js/trix.js"></script>
+<!-- trix editor -->
+<link rel="stylesheet" type="text/css" href="/css/trix.css">
+<script type="text/javascript" src="/js/trix.js"></script>
+
+{{-- css kalender --}}
+<link rel="stylesheet" href="/css/kalender.css">
 
     <style>
         trix-toolbar [data-trix-button-group="file-tools"]{
@@ -23,7 +26,7 @@
         }
     </style>
   </head>
-  <body>
+  <body class="light">
 
 @include('dashboard.layouts.header')
 
@@ -41,6 +44,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
 
+<script src="/js/dashboard.js"></script>
 <script src="/js/dashboard.js"></script>
 
 </body>

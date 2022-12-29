@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\Anime;
-use Illuminate\Routing\Controller;
+use App\Models\Like;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class BookmarkController extends Controller
 {
     public function index()
     {
-        return view('/bookmark', [
+        return view('bookmark', [
             'judul' => 'Bookmark',
             'active' => 'home',
             "animes" => Anime::join('likes', 'animes.id', '=', 'likes.anime_id')
@@ -21,15 +24,16 @@ class BookmarkController extends Controller
 
     public function liker(Anime $anime)
     {
-        $user = auth()->user();
-        $user->votedAnimes()->attach($anime->id);
+        // $user = auth()->user();
+        $user = User::all();
+        $user->votedAnime()->attach($anime->id);
         return redirect('/');
     }
 
     public function disliker(Anime $anime)
     {
-        $user = auth()->user();
-        $user->votedAnimes()->detach($anime->id);
+        $user = User::all();
+        $user->votedAnime()->detach($anime->id);
         return redirect('/bookmark');
     }
 }

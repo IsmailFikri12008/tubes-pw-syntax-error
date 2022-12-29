@@ -15,7 +15,7 @@
         position: absolute;
         border-bottom: 1px solid black;
         width: 400px;
-        left: 350px;
+        left: 320px;
         top: 50%;
     }
     .judul h1:after {
@@ -23,7 +23,7 @@
         position: absolute;
         border-bottom: 1px solid black;
         width: 400px;
-        right: 350px;
+        right: 320px;
         top: 50%;
     }
 </style>
@@ -47,7 +47,7 @@
             <td style="text-align: center;">{{ $loop->iteration }}</td>
             <td style="text-align: center;">{{ $an->judul }}</td>
             <td style="text-align: center;">{{ $an->rating }}</td>
-            <td style="text-align: center;"><img src="{{ asset('storage/' . $an->image) }}" alt="{{ $an->category->name }}" class="img-fluid"></td>
+            <td style="text-align: center;"><img src="{{ asset('storage/' . $an->image) }}" alt="{{ $an->category->name }}" class="img-fluid object-fit"></td>
         </tr>
     @endforeach
 </tbody>
