@@ -38,10 +38,10 @@
     <div class="row">
         @foreach ($animes as $anime)
             <div class="col-md-4 bb-3">
-                <div class="card object-fit">
+                <div class="card" style="height: 900px; margin-bottom: 30px;">
                     <div class="position-absolute px-3 py-2" style="background-color: rgba(0, 0, 0, 0.7)"><a href="/{{ $anime->category->slug }}" class="text-white text-decoration-none">{{ $anime->category->name }}</a></div>
                     @if ($anime->image)
-                        <img src="{{ asset('storage/' . $anime->image) }}" alt="{{ $anime->category->name }}" class="img-fluid">
+                        <img src="{{ asset('storage/' . $anime->image) }}" alt="{{ $anime->category->name }}" class="img-fluid"  style="height: 500px;">
                     @else
                         <img src="https://kitsu.io/api/edge/anime?filter[slug]={{ $anime->category->name }}" class="card-img-top" alt="{{ $anime->category->name }}">
                     @endif
@@ -51,8 +51,8 @@
                         <h5 class="card-text text-center"><a href="/{{ $anime->genre->slug }}" class="text-decoration-none">{{ $anime->genre->name }}</a></h5>
                         <p class="card-text justify">{{ $anime->excerpt }}</p>
                         <div class="d-flex justify-content-between">
-                            <a href="/home/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
-                            @if (DB::table('likes')->where('anime_id', '=', $anime->id)->where('user_id', '=', Auth::id())->first())
+                            <a href="/detail/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
+                            {{-- @if (DB::table('likes')->where('anime_id', '=', $anime->id)->where('user_id', '=', Auth::id())->first())
                                 <div class="bookmarked">
                                     <span class="card-link text-decoration-none border-0 bg-white">
                                         <i class="bi bi-bookmarks"></i>
@@ -68,7 +68,7 @@
                                         Tersimpan
                                     </button>
                                 </form>
-                            @endif
+                            @endif --}}
                         </div>
                 </div>
                 </div>

@@ -26,7 +26,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
             <form action="/logout" method="post">
               @csrf
-              <button type="button" class="btn btn-light">Logout <span data-feather="log-out" class="align-text-bottom"></span></button>
+              <button type="submit" class="btn btn-light">Logout <span data-feather="log-out" class="align-text-bottom"></span></button>
             </form>
         </div>
       </div>

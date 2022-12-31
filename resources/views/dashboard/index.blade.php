@@ -6,7 +6,6 @@
         <h1>Welcome Back, {{ auth()->user()->name }}</h1>
     </div>
 
-    @if ($animes->count())
     <div class="container">
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col">
@@ -14,9 +13,8 @@
                 <div class="card-body">
                   <h5 class="card-title"><i data-feather="archive"></i> Jumlah Post</h5>
                   <hr>
-                  @foreach ($animes as $anime)
-                  <p class="card-text"></p>
-                  @endforeach
+                  <p class="card-text">{{ $total }} Post</p>
+                  
                 </div>
               </div>
             </div>
@@ -25,9 +23,8 @@
                 <div class="card-body">
                   <h5 class="card-title"><i data-feather="user"></i> Jumlah User</h5>
                   <hr>
-                  @foreach ($animes as $anime)
-                  <p class="card-text"></p>
-                  @endforeach
+                  <p class="card-text">{{ $user }} User</p>
+                  
                 </div>
               </div>
             </div>
@@ -36,15 +33,13 @@
                 <div class="card-body">
                   <h5 class="card-title"><i data-feather="user-check"></i> Jumlah Admin</h5>
                   <hr>
-                  @foreach ($animes as $anime)
-                  <p class="card-text"></p>
-                  @endforeach
+                  <p class="card-text">{{ $admin }} Admin</p>
+                  
                 </div>
               </div>
             </div>
           </div>
     </div>
-    @endif
     <br><br>
 
     {{-- Kalender --}}

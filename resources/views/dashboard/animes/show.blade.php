@@ -20,13 +20,13 @@
     <div class="col-lg-4">
         <div class="card">
             <div class="card">
-                @if ($anime->image)
+                {{-- @if ($anime->image) --}}
                 <div style="overflow: hidden;">
-                    <img src="{{ asset('storage/' . $anime->image) }}" alt="{{ $anime->category->name }}" class="img-fluid mt-3">
+                    <img src="{{ asset('storage/' . $anime->image) }}" alt="{{ $anime->category->name }}" class="img-fluid mt-3" style="height: 600px;">
                 </div>
-                @else
+                {{-- @else
                     <img src="https://kitsu.io/api/edge/anime?filter[slug]={{ $anime->category->name }}" alt="{{ $anime->category->name }}" class="img-fluid mt-3">
-                @endif
+                @endif --}}
                 <div class="card-body">
                     <h2>Informasi</h2>
                     <hr>

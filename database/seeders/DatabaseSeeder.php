@@ -123,8 +123,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Genre::create([
-            'name' => 'Slie of Life',
-            'slug' => 'slie-of-life'
+            'name' => 'Slice of Life',
+            'slug' => 'slice-of-life'
         ]);
 
         Genre::create([
@@ -136,8 +136,8 @@ class DatabaseSeeder extends Seeder
            'user_id' => 1,
            'category_id' => 1,
            'genre_id' => 1,
-           'judul' => 'One Piece',
-           'slug' => 'one-piece',
+           'judul' => 'Spy x Family',
+           'slug' => 'spy-x-family',
            'tipe' => 'TV',
            'episode' => '12 Episode',
            'status' => 'On Going',
@@ -153,7 +153,8 @@ class DatabaseSeeder extends Seeder
            'rating' => '2.4',
            'image' => 'Go-Toubun.jpg',
            'excerpt' => 'Ini Excerpt',
-           'sinopsis' => 'Ini Sinopsis Ya Geys'
+           'sinopsis' => 'Ini Sinopsis Ya Geys',
+           'is_rekomendasi' => '1'
         ]);
 
         // Post::create([

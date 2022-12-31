@@ -109,13 +109,13 @@ Route::get('/bookmark', [BookmarkController::class, 'index'])->middleware('auth'
 Route::post('/bookmark/{animes:slug}', [BookmarkController::class, 'liker'])->middleware('auth');
 Route::post('/bookmark/{animes:slug}/hapus', [BookmarkController::class, 'disliker'])->middleware('auth');
 
-Route::get('/detail', function () {
-    return view('detail', [
-        "title" => "Detail",
-        "active" => 'detail',
-        "animes" => Anime::all()
-    ]);
-});
+// Route::get('/detail', function () {
+//     return view('detail', [
+//         "title" => "Detail",
+//         "active" => 'detail',
+//         "animes" => Anime::all()
+//     ]);
+// });
 
 Route::get('/about', function () {
     return view('about', [
@@ -134,6 +134,7 @@ Route::get('/categories', function () {
 
 Route::get('/', [AnimeController::class, 'index']);
 Route::get('/home', [AnimeController::class, 'index']);
+Route::get('/detail/{slug}', [AnimeController::class, 'detail']);
 
 // Halaman single post
 Route::get('/home/{animes:slug}', [AnimeController::class, 'show'])->middleware('auth');
@@ -145,7 +146,10 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/dashboard', function () {
     return view('dashboard.index', [
-        'animes' => Anime::all()
+        'animes' => Anime::all(),
+        'total' => Anime::where('user_id', auth()->user()->id)->count('category_id'),
+        'user' => User::all()->count('id'),
+        'admin' => User::where('is_admin', 1)->count('id')
     ]);
 })->middleware('auth');
 Route::get('/dashboard/animes/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');

@@ -7,6 +7,8 @@ use App\Models\Genre;
 use App\Models\Category;
 use illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Storage;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
@@ -74,10 +76,11 @@ class DashboardPostController extends Controller
             'demografis' => 'required',
             'durasi' => 'required',
             'rating' => 'required',
-            'sinopsis' => 'required'
+            'sinopsis' => 'required',
+            'is_rekomendasi' => 'required'
         ]);
 
-        if($request->file('image')) {
+        if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('anime-images');
         }
 
@@ -146,17 +149,18 @@ class DashboardPostController extends Controller
             'demografis' => 'required',
             'durasi' => 'required',
             'rating' => 'required',
-            'sinopsis' => 'required'
+            'sinopsis' => 'required',
+            'is_rekomendasi' => 'required'
         ];
 
-        if($request->slug != $anime->slug) {
+        if ($request->slug != $anime->slug) {
             $rules['slug'] = 'required|unique:animes';
         }
 
         $validatedData = $request->validate($rules);
 
-        if($request->file('image')) {
-            if($request->oldImage) {
+        if ($request->file('image')) {
+            if ($request->oldImage) {
                 Storage::delete($request->oldImage);
             }
             $validatedData['image'] = $request->file('image')->store('anime-images');
@@ -179,7 +183,7 @@ class DashboardPostController extends Controller
      */
     public function destroy(Anime $anime)
     {
-        if($anime->image) {
+        if ($anime->image) {
             Storage::delete($anime->image);
         }
 

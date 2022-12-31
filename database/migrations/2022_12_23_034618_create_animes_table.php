@@ -36,6 +36,7 @@ return new class extends Migration
             $table->String('image')->nullable();
             $table->text('excerpt');
             $table->text('sinopsis');
+            $table->boolean('is_rekomendasi')->default(false);
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
