@@ -178,6 +178,15 @@
             @enderror
         </div>
         <div class="mb-3">
+            <label for="is_rekomendasi" class="form-label">Rekomendasi atau Tidak</label>
+            <input type="text" class="form-control @error('is_rekomendasi') is-invalid @enderror" id="is_rekomendasi" name="is_rekomendasi" required autofocus value="{{ old('is_rekomendasi', $anime->is_rekomendasi) }}">
+            @error('is_rekomendasi')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+        <div class="mb-3">
             <label for="image" class="form-label">Anime Image</label>
             <input type="hidden" name="oldImage" value="{{ $anime->image }}">
             @if ($anime->image)

@@ -26,11 +26,8 @@ class HomeController extends Controller
             "judul" => "Home" . $judul,
             "active" => 'home',
             // "posts" => Post::all()
-            // "animes" => Anime::latest()->filter(request(['search', 'category', 'author'])),
-            "anifall" => Anime::latest()->where('category_id' , 1)->filter(request(['search', 'category', 'author']))->paginate(6)->withQueryString(),
-            "anispri" => Anime::latest()->where('category_id' , 2)->filter(request(['search', 'category', 'author']))->paginate(6)->withQueryString(),
-            "anisum" => Anime::latest()->where('category_id' , 3)->filter(request(['search', 'category', 'author']))->paginate(6)->withQueryString(),
-            "aniwin" => Anime::latest()->where('category_id' , 4)->filter(request(['search', 'category', 'author']))->paginate(6)->withQueryString()
+            "animes" => Anime::all()->filter(request(['search', 'category', 'author'])),
+            
         ]);
     }
 }

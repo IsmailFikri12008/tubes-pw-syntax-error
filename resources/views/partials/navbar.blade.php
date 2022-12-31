@@ -95,8 +95,8 @@
                         @can('admin')
                         <li><a class="dropdown-item" href="/dashboard"><i class="bi bi-layout-text-sidebar-reverse"></i> My Dashboard</a></li>
                         @endcan
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="/bookmark"><i class="bi bi-bookmarks"></i> Simpan</a></li>
+                        {{-- <li><hr class="dropdown-divider"></li> --}}
+                        {{-- <li><a class="dropdown-item" href="/bookmark"><i class="bi bi-bookmarks"></i> Simpan</a></li> --}}
                         <li><hr class="dropdown-divider"></li>
                         <form action="/logout" method="post">
                             @csrf
