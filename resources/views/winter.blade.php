@@ -49,7 +49,7 @@
                         <p class=" text-center"><small class="text-muted">By. <a href="/home?author={{ $anime->author->name }}" class="text-decoration-none">{{ $anime->author->name }}</a> {{ $anime->created_at->diffForHumans() }}</small></p>
                         <h5 class="card-text text-center"><a href="/{{ $anime->genre->slug }}" class="text-decoration-none">{{ $anime->genre->name }}</a></h5>
                         <p class="card-text justify">{{ $anime->excerpt }}</p>
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-center">
                             <a href="/detail/{{ $anime->slug }}" class="btn btn-primary">Read more</a>
                             {{-- @if (DB::table('likes')->where('anime_id', '=', $anime->id)->where('user_id', '=', Auth::id())->first())
                                 <div class="bookmarked">
