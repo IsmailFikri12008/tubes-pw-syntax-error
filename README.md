@@ -32,6 +32,7 @@ Pada STX Anime List terdapat 3 user dimana ada:
 |Rekomendasi Anime| ❌ | ✅ | ✅|
 |Dashboard Admin| ❌ |❌| ✅|
 #### Thanks To
+
 <ul>
 <li>Mr. R. Sandika Galih Amalga</li>
 <li>Sahid Jafar</li>
