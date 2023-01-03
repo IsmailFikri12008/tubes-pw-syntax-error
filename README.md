@@ -32,9 +32,13 @@ Pada STX Anime List terdapat 3 user dimana ada:
 |Rekomendasi Anime| ❌ | ✅ | ✅|
 |Dashboard Admin| ❌ |❌| ✅|
 #### Thanks To
-> Mr. R. Sandika Galih Amalga
-> Aditya Fataha Dwijaya
-> Sahid Jafar
-> Asep Moh. Aripin
+
+<ul>
+<li>Mr. R. Sandika Galih Amalga</li>
+<li>Sahid Jafar</li>
+<li>Asep Moh. Aripin</li>
+<li>Aditya Fataha Dwijaya</li>
+</ul>
+
 #### Licences
 © 2022 Syntax Error. All rights reserved.
