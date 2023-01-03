@@ -134,7 +134,7 @@ Route::get('/categories', function () {
 
 Route::get('/', [AnimeController::class, 'index']);
 Route::get('/home', [AnimeController::class, 'index']);
-Route::get('/detail/{slug}', [AnimeController::class, 'detail']);
+Route::get('/detail/{slug}', [AnimeController::class, 'detail'])->middleware('auth');
 
 // Halaman single post
 Route::get('/home/{animes:slug}', [AnimeController::class, 'show'])->middleware('auth');
